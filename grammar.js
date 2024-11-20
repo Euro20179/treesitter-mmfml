@@ -10,9 +10,9 @@ module.exports = grammar({
             $.header5,
             $.header6,
             $.footnote_block,
-            $.code_block,
+            prec(10, $.code_block),
             $.list,
-            $.simple_marked_text,
+            prec(1, $.simple_marked_text),
         )),
         simple_marked_text: $ => prec.left(repeat1(choice(
             $.bold,
@@ -38,8 +38,7 @@ module.exports = grammar({
         esc: $ => seq(alias("\\", $.backslash) , field("char", alias(/./, $.escaped_char))),
 
         code_block: $ => seq(
-            /\s/,
-            alias(/>/, $.code_block_start_arrow),
+            alias(">", $.code_block_start_arrow),
             choice(
                 field( "language", alias(token.immediate(/[A-Za-z0-9]+\n/), $.language)),
                 token.immediate(/\n/)
