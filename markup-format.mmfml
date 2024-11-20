@@ -17,7 +17,9 @@ It is a markup format *made* to be displayed inside neovim
 Whitespace at the start of a line is ignored
 This way the user to format the text however they see fit
 
+        == Esc ==
 
+Any special character can be escaped with \\ \= yes
 
         == Bold ==
 
@@ -49,19 +51,21 @@ This way the user to format the text however they see fit
 
 `+this is a highlight+`
 
-NOTE:>html
+>html
 <mark>this is a highlight</mark>
->
+<
 
 
-       == Headers == ^[1]
+       == Headers ==
 
 H1: = text =
 H2: == text ==
 H3: === text ===
 .
 .
-.
+H6: ====== text ======
+
+The ending `=` are optional
 
 
        == Dividers ==
@@ -112,6 +116,8 @@ To create the actual footnote text, use
     The footnote goes here
 [/1]
 
+hi^[1] yes
+
 
 To link to a footnote do `^[1]`
 
@@ -139,11 +145,3 @@ quote
 
 putting `word:` before the opening `>` will cause `word:` to be highlighted
 
-===============================================================================
-
-                                 = Footnotes =
-
-^[1]:
-    Headers can go as deep as you want, it doesn't really matter
-    since the point of this format is to simply look nice in neovim
-[/1]

@@ -11,7 +11,8 @@ module.exports = grammar({
             $.header6,
             $.footnote_block,
             $.code_block,
-            $.simple_marked_text
+            $.list,
+            $.simple_marked_text,
         )),
         simple_marked_text: $ => prec.left(repeat1(choice(
             $.bold,
@@ -22,25 +23,29 @@ module.exports = grammar({
             $.link,
             $.higlight,
             $.footnote_ref,
+            $.anchor,
             $.plain,
             $.esc,
         ))),
 
-        divider: $ => seq(prec.right(/[=\-\+_]+/), token.immediate("\n")),
+        list: $ => seq(alias(token.immediate(/\s+- /), $.list_indicator)),
 
-        _footnote_text: $ => /[A-Za-z0-9\*\+]+/,
-        footnote_block: $ => seq("\n^[", $._footnote_text, "]\n", $.simple_marked_text, "\n[/", $._footnote_text, "]"),
+        divider: $ => token.immediate(repeat1(seq(/[=\-\+_]/,/[=\-\+_]/,/[=\-\+_]/)), token.immediate("\n")),
 
-        esc: $ => seq("\\", /./),
+        _footnote_name_text: $ => /[A-Za-z0-9\*\+]+/,
+        footnote_block: $ => seq("\n^[", $._footnote_name_text, "]\n", repeat1($.simple_marked_text), "\n[/", $._footnote_name_text, "]"),
+
+        esc: $ => seq(alias("\\", $.backslash) , /./),
 
         code_block: $ => seq(
-            ">",
+            /\s/,
+            alias(/>/, $.code_block_start_arrow),
             choice(
-                alias(token.immediate(/[A-Za-z0-9]+\n/), $.language),
+                field( "language", alias(token.immediate(/[A-Za-z0-9]+\n/), $.language)),
                 token.immediate(/\n/)
             ),
             alias(repeat1(/.+/), $.code_text),
-            prec.left(token.immediate("\n<"))
+            prec.left(alias(token.immediate("\n<"), $.code_block_end_arrow))
         ),
 
         header1: $ => seq("=", $.simple_text, token.immediate(choice("=", "\n"))),
@@ -49,16 +54,19 @@ module.exports = grammar({
         header4: $ => seq("====", $.simple_text, token.immediate(choice("====", "\n"))),
         header5: $ => seq("=====", $.simple_text, token.immediate(choice("=====", "\n"))),
         header6: $ => seq("======", $.simple_text, token.immediate(choice("======", "\n"))),
-        footnote_ref: $ => seq("^[", $.simple_text, "]"),
-        bold: $ => seq("*", $.simple_marked_text, "*"),
-        italic: $ => seq("/", $.simple_marked_text, "/"),
-        strikethrough: $ => choice(seq("~", $.simple_marked_text, "~"), seq("-", $.simple_marked_text, "-")),
-        underline: $ => seq("_", $.simple_marked_text, "_"),
-        higlight: $ => seq("+", $.simple_marked_text, "+"),
-        link: $ => seq(optional(seq("[", $.simple_marked_text, "]")), token.immediate("|"), $.plain, "|"),
-        pre_sample: $ => seq("`", /[^`\n]+/, "`"),
-        plain: $ => /[^><\*\/~\-_\[\]\|=`\+\^]+/,
 
+        footnote_ref: $ => seq(alias("^[", $.footnote_start), $.plain, alias("]", $.footnote_end)),
+        link: $ => seq(optional(seq("[", $.simple_marked_text, "]")), token.immediate("|"), alias(/[^|\n]+/, $.link_url), "|"),
+
+        bold: $ => seq(alias("*", $.bold_start), $.simple_marked_text, alias("*", $.bold_end)),
+        italic: $ => seq(alias("/", $.italic_start), $.simple_marked_text, alias("/", $.italic_end)),
+        strikethrough: $ => seq(alias("~", $.strikethrough_start), $.simple_marked_text, alias("~", $.strikethrough_end)),
+        underline: $ => seq(alias("_", $.underline_start), $.simple_marked_text, alias("_", $.underline_end)),
+        pre_sample: $ => seq(alias("`", $.pre_sample_start), /[^`\n]+/, alias("`", $.pre_sample_end)),
+        higlight: $ => seq(alias("+", $.higlight_start), $.simple_marked_text, alias("+", $.higlight_end)),
+        anchor: $ => seq(alias("#", $.anchor_start), $.simple_marked_text, alias("#", $.anchor_end)),
+
+        plain: $ => prec.left(repeat1(/./)),
         simple_text: $ => /[^\n]+/
     },
 })
