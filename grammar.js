@@ -28,12 +28,12 @@ module.exports = grammar({
             $.esc,
         ))),
 
-        list: $ => seq(alias(token.immediate(/\s+- /), $.list_indicator)),
+        list: $ => seq(alias(token.immediate(/\s+(?:-|\d+[\.\)]?)\s/), $.list_indicator)),
 
         divider: $ => token.immediate(repeat1(/[=\-\+_]+/), token.immediate("\n")),
 
-        _footnote_name_text: $ => /[A-Za-z0-9\*\+]+/,
-        footnote_block: $ => seq("\n^[", $._footnote_name_text, "]\n", repeat1($.simple_marked_text), "\n[/", $._footnote_name_text, "]"),
+        _footnote_name_text: $ => repeat1(/[A-Za-z0-9\*\+]/),
+        footnote_block: $ => seq("\n^[", alias($._footnote_name_text, $.footnote_block_name), "]:\n", repeat1($.simple_marked_text), "\n[/", $._footnote_name_text, "]"),
 
         esc: $ => seq(alias("\\", $.backslash) , field("char", alias(/./, $.escaped_char))),
 
