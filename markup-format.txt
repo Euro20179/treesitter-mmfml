@@ -1,0 +1,149 @@
+                                   = intro =
+
+The point of this markup format is that indentation whitespace doesn't matter
+
+And to be a combination of various markup things that i like from various
+markup languages
+
+This text is only structured so that a treesitter parser can parse it
+It is not meant to be converted to html or something viewed
+It is a markup format *made* to be displayed inside neovim
+
+===============================================================================
+
+
+                                   = Syntax =
+
+Whitespace at the start of a line is ignored
+This way the user to format the text however they see fit
+
+
+
+        == Bold ==
+
+`*text*`
+
+
+        == Italic ==
+
+`/text/`
+
+
+        == Underline ==
+
+`_text_`
+
+        == Strikethrough ==
+
+`~text~` or `-text-`
+
+        == Links ==
+
+`[shown text]|the link|`
+
+`the link` can be an |Anchor|, header, https?:// or a path to a file
+`[shown text]` is optional
+
+
+       == Highlight/mark ==
+
+`+this is a highlight+`
+
+NOTE:>html
+<mark>this is a highlight</mark>
+>
+
+
+       == Headers == ^[1]
+
+H1: = text =
+H2: == text ==
+H3: === text ===
+.
+.
+.
+
+
+       == Dividers ==
+
+`---`
+`___`
+`+++`
+`===`
+
+Text exactly 1 line below a divider will be treated as an [H1 Header]|Headers|
+
+
+       == Unordered bullets ==
+
+`- top level`
+    `- next level (interally this is still top level
+      because whitespace is ignored)`
+
+
+      == Ordered bullets ==
+
+`1. top level`
+    `a. next level`
+
+*NOTE*: The user is expected to number themselves
+
+
+      == Tables ==
+
+>
+Column 1 | Column 2
+---------|---------
+Data 1   | Data 2
+<
+
+
+
+      == Anchor ==
+
+An anchor can be any header OR, marked with `#anchor#`
+
+
+      == Footnotes ==
+
+You can link to a footnote with `^[text]` where `text` may be any text
+To create the actual footnote text, use
+^[1]
+    The footnote goes here
+[/1]
+
+
+To link to a footnote do `^[1]`
+
+
+
+       == Code snippet ==
+`markup in here is ignored`
+
+
+       == Code block ==
+>Language
+markup in here is also ignored
+<
+
+eg:
+>python
+print("Hello")
+<
+
+This can also be used to make a plain quote:
+
+>
+quote
+<
+
+putting `word:` before the opening `>` will cause `word:` to be highlighted
+
+===============================================================================
+
+                                 = Footnotes =
+
+^[1]:
+    Headers can go as deep as you want, it doesn't really matter
+    since the point of this format is to simply look nice in neovim
+[/1]
