@@ -35,7 +35,7 @@ module.exports = grammar({
         _footnote_name_text: $ => /[A-Za-z0-9\*\+]+/,
         footnote_block: $ => seq("\n^[", $._footnote_name_text, "]\n", repeat1($.simple_marked_text), "\n[/", $._footnote_name_text, "]"),
 
-        esc: $ => seq(alias("\\", $.backslash) , /./),
+        esc: $ => seq(alias("\\", $.backslash) , field("char", alias(/./, $.escaped_char))),
 
         code_block: $ => seq(
             /\s/,
