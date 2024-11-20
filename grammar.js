@@ -30,7 +30,7 @@ module.exports = grammar({
 
         list: $ => seq(alias(token.immediate(/\s+- /), $.list_indicator)),
 
-        divider: $ => token.immediate(repeat1(seq(/[=\-\+_]/,/[=\-\+_]/,/[=\-\+_]/)), token.immediate("\n")),
+        divider: $ => token.immediate(repeat1(/[=\-\+_]+/), token.immediate("\n")),
 
         _footnote_name_text: $ => /[A-Za-z0-9\*\+]+/,
         footnote_block: $ => seq("\n^[", $._footnote_name_text, "]\n", repeat1($.simple_marked_text), "\n[/", $._footnote_name_text, "]"),
@@ -66,7 +66,7 @@ module.exports = grammar({
         higlight: $ => seq(alias("+", $.higlight_start), $.simple_marked_text, alias("+", $.higlight_end)),
         anchor: $ => seq(alias("#", $.anchor_start), $.simple_marked_text, alias("#", $.anchor_end)),
 
-        plain: $ => prec.left(repeat1(/./)),
+        plain: $ => prec.right(repeat1(choice(/\s/, /./))),
         simple_text: $ => /[^\n]+/
     },
 })
