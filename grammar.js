@@ -47,7 +47,19 @@ module.exports = grammar({
 
     divider: $ => token.immediate(
       seq(
-        repeat1(/[=\-\+_:]+/),
+        repeat1(
+          choice(
+            "=",
+            "-",
+            "+",
+            "_",
+            ":",
+            "—",
+            "–",
+            "‗",
+          )
+        ),
+        // repeat1(/[=\-\+_:]+/),
         "\n"
       )
     ),
