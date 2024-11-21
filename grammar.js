@@ -58,6 +58,7 @@ module.exports = grammar({
             "–",
             "‗",
             "‾",
+            "━",
           )
         ),
         // repeat1(/[=\-\+_:]+/),
