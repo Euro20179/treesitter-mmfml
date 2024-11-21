@@ -34,52 +34,52 @@ But the user can just set their font if it's not monospace :)
 
                                    = Building
 
-    == Requirements
+== Requirements
 
-- [tree-sitter-cli]
-  |https://tree-sitter.github.io/tree-sitter/creating-parsers#dependencies|
+    - [tree-sitter-cli]
+      |https://tree-sitter.github.io/tree-sitter/creating-parsers#dependencies|
 
-    == Downloading + Building
+== Downloading + Building
 
->sh
-git clone https://github.com/euro20179/treesitter-mmfml
-cd treesitter-mmfml
-tree-sitter generate
-<
+    >sh
+    git clone https://github.com/euro20179/treesitter-mmfml
+    cd treesitter-mmfml
+    tree-sitter generate
+    <
 
-    == Using in neovim
+== Using in neovim
 
-I just use something like
+    I just use something like
 
->lua
--- see: https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#adding-parsers
-local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+    >lua
+    -- see: https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#adding-parsers
+    local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
-parser_config.mmfml = {
-    install_info = {
-        url = "/path/to/cloned-directory",
-        files = { "src/parser.c" },
-        branch = "master",
-        generate_requires_npm = false,
-        requires_generate_from_grammar = false
-    },
-    filetype = "mmfml"
-}
-
---i dont have this in my config, but the above docs say to use it
-vim.treesitter.language.register('mmfml', 'mmfml')
-<
-
-Don't forget to also add
-
->lua
---see `:help vim.filetype.add()`
-vim.filetype.add({
-    extention = {
-        mmfml = "mmfml"
+    parser_config.mmfml = {
+        install_info = {
+            url = "/path/to/cloned-directory",
+            files = { "src/parser.c" },
+            branch = "master",
+            generate_requires_npm = false,
+            requires_generate_from_grammar = false
+        },
+        filetype = "mmfml"
     }
-})
-<
+
+    --i dont have this in my config, but the above docs say to use it
+    vim.treesitter.language.register('mmfml', 'mmfml')
+    <
+
+    Don't forget to also add
+
+    >lua
+    --see `:help vim.filetype.add()`
+    vim.filetype.add({
+        extention = {
+            mmfml = "mmfml"
+        }
+    })
+    <
 
 ===============================================================================
 
