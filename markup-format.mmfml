@@ -19,7 +19,7 @@ This way the user to format the text however they see fit
 
         == Esc ==
 
-Any special character can be escaped with \\ \= yes
+Any special character can be escaped with \\
 
         == Bold ==
 
@@ -43,7 +43,7 @@ Any special character can be escaped with \\ \= yes
 
 `[shown text]|the link|`
 
-`the link` can be an |Anchor|, header, https?:// or a path to a file
+`the link` can be an |Anchor|, name of a |Header|, `https?://` or a path to a file
 `[shown text]` is optional
 
 
@@ -56,7 +56,7 @@ Any special character can be escaped with \\ \= yes
 <
 
 
-       == Headers ==
+       == Header ==
 
 H1: = text =
 H2: == text ==
@@ -74,9 +74,11 @@ The ending `=` are optional
 `___`
 `+++`
 `===`
+`:::`
 
-Text exactly 1 line below a divider will be treated as an [H1 Header]|Headers|
+A divider is only given syntatic meaning in order to encourage the use of them
 
+It really makes a document look nicer
 
        == Unordered bullets ==
 
@@ -88,18 +90,22 @@ Text exactly 1 line below a divider will be treated as an [H1 Header]|Headers|
       == Ordered bullets ==
 
 `1. top level`
-    `a. next level`
+    `1. next level`
 
 *NOTE*: The user is expected to number themselves
 
 
       == Tables ==
 
->
+>markdown
 Column 1 | Column 2
 ---------|---------
 Data 1   | Data 2
 <
+
+Yeah uh, there is no table, it's too much effort,
+if you want a table, use a markdown block,
+or dont since it really doesn't matter that much
 
 
 
@@ -112,12 +118,11 @@ An anchor can be any header OR, marked with `#anchor#`
 
 You can link to a footnote with `^[text]` where `text` may be any text
 To create the actual footnote text, use
-^[1]
+>
+^[1]:
     The footnote goes here
 [/1]
-
-hi^[1] yes
-
+<
 
 To link to a footnote do `^[1]`
 
