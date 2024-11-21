@@ -35,14 +35,13 @@ module.exports = grammar({
           "-",
           seq(
             repeat1(/\d/),
-            optional(/[\.\)]/)
+            /[\.\)]/
           ),
           seq(
             repeat1(/[A-Za-z]/),
             /[\.\)]/
           )
         ),
-        /\s/
       )
     ),
 
