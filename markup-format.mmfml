@@ -19,7 +19,7 @@ This way the user to format the text however they see fit
 
         == Esc ==
 
-Any special character can be escaped with \\
+Any special character can be escaped with `\`
 
         == Bold ==
 

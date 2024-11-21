@@ -44,7 +44,7 @@ module.exports = grammar({
                 token.immediate(/\n/)
             ),
             alias(repeat1(/.+/), $.code_text),
-            prec.left(alias(token.immediate("\n<"), $.code_block_end_arrow))
+            prec.left(token.immediate(seq("\n", repeat(/\s/), "<")))
         ),
 
         header1: $ => seq("=", $.simple_text, token.immediate(choice("=", "\n"))),
