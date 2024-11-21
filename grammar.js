@@ -32,7 +32,7 @@ module.exports = grammar({
       seq(
         repeat1(/\s/),
         choice(
-          "-",
+          choice("-", "•"),
           seq(
             repeat1(/\d/),
             choice(".", "\x29") //29 is close paren
@@ -57,6 +57,7 @@ module.exports = grammar({
             "—",
             "–",
             "‗",
+            "‾",
           )
         ),
         // repeat1(/[=\-\+_:]+/),
