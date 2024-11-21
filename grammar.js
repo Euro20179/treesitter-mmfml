@@ -32,7 +32,7 @@ module.exports = grammar({
 
         divider: $ => token.immediate(seq(repeat1(/[=\-\+_:]+/), "\n")),
 
-        _footnote_name_text: $ => repeat1(/[A-Za-z0-9\*\+]/),
+        _footnote_name_text: $ => repeat1(/[A-Za-z0-9\*\+\-_]/),
         footnote_block: $ => seq("\n^[", alias($._footnote_name_text, $.footnote_block_name), "]:\n", repeat1($.simple_marked_text), "\n[/", $._footnote_name_text, "]"),
 
         esc: $ => seq(alias("\\", $.backslash) , field("char", alias(/./, $.escaped_char))),
@@ -54,7 +54,7 @@ module.exports = grammar({
         header5: $ => seq("=====", $.simple_text, token.immediate(choice("=====", "\n"))),
         header6: $ => seq("======", $.simple_text, token.immediate(choice("======", "\n"))),
 
-        footnote_ref: $ => seq(alias("^[", $.footnote_start), $.plain, alias("]", $.footnote_end)),
+        footnote_ref: $ => seq(alias("^[", $.footnote_start), $._footnote_name_text, alias("]", $.footnote_end)),
         link: $ => seq(optional(seq("[", $.simple_marked_text, "]")), token.immediate("|"), alias(/[^|\n]+/, $.link_url), "|"),
 
         bold: $ => seq(alias("*", $.bold_start), $.simple_marked_text, alias("*", $.bold_end)),
