@@ -35,11 +35,11 @@ module.exports = grammar({
           "-",
           seq(
             repeat1(/\d/),
-            /[\.\)]/
+            choice(".", "\x29") //29 is close paren
           ),
           seq(
             repeat1(/[A-Za-z]/),
-            /[\.\)]/
+            choice(".", "\x29")
           )
         ),
       )
