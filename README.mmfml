@@ -44,8 +44,12 @@ But the user can just set their font if it's not monospace :)
     >sh
     git clone https://github.com/euro20179/treesitter-mmfml
     cd treesitter-mmfml
+    tree-sitter init
     tree-sitter generate
+    cmake .
+    make
     <
+        /note: at some point i will add all the relevant files to git/
 
 == Using in neovim
 
