@@ -70,21 +70,29 @@ The ending `=` are optional
 
        == Dividers ==
 
-`---`
-`___`
-`+++`
-`===`
-`:::`
+`=========`
+`---------`
+`++++++++`
+`________`
+`::::::::`
+`————————`
+`––––––––`
+`‗‗‗‗‗‗‗‗`
+`‾‾‾‾‾‾‾‾`
+`━━━━━━━━`
 
 A divider is only given syntatic meaning in order to encourage the use of them
 
-It really makes a document look nicer
+It really makes a document look nicer,
+and there's so many because im not sure which kind of dividers i like yet,
+and some divide more than others, eg: `---` is very "weak" compared to `:::`
 
        == Unordered bullets ==
 
 `- top level`
     `- next level (interally this is still top level
       because whitespace is ignored)`
+`•` may also be used
 
 
       == Ordered bullets ==
