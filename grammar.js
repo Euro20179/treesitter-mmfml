@@ -28,7 +28,10 @@ module.exports = grammar({
       $.esc,
     ))),
 
-    list: $ => seq(alias(token.immediate(/\s+(?:-|\d+[\.\)]?)\s/), $.list_indicator)),
+    list: $ => seq(
+      alias(token.immediate(/\s+(?:-|(?:\d+[\.\)]?|[A-Za-z][\.\)]))\s/),
+      $.list_indicator
+    )),
 
     divider: $ => token.immediate(
       seq(

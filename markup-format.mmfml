@@ -90,7 +90,8 @@ It really makes a document look nicer
       == Ordered bullets ==
 
 `1. top level`
-    `1. next level`
+    `a. next level`
+        `i. next level`
 
 *NOTE*: The user is expected to number themselves
 
