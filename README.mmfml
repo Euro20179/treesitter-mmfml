@@ -29,3 +29,48 @@ It should look fine even though github won't have a renderer for it
 As a side note, this format pretty heavily relies on monospace font, so uh yeah
 
 But the user can just set their font if it's not monospace :)
+
+===============================================================================
+
+                                   = Building
+
+    == Requirements
+
+- [tree-sitter-cli] |https://tree-sitter.github.io/tree-sitter/creating-parsers#dependencies|
+
+    == Downloading + Building
+
+>sh
+git clone https://github.com/euro20179/treesitter-mmfml
+cd treesitter-mmfml
+tree-sitter generate
+<
+
+    == Using in neovim
+
+I just use something like
+
+>lua
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+
+parser_config.mmfml = {
+    install_info = {
+        url = "/path/to/cloned-directory",
+        files = { "src/parser.c" },
+        branch = "master",
+        generate_requires_npm = false,
+        requires_generate_from_grammar = false
+    },
+    filetype = "mmfml"
+}
+<
+
+Don't forget to also add
+
+>lua
+vim.filetype.add({
+    extention = {
+        mmfml = "mmfml"
+    }
+})
+<

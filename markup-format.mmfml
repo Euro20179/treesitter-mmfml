@@ -52,7 +52,7 @@ Any special character can be escaped with \\
 `+this is a highlight+`
 
 >html
-<mark>this is a highlight</mark>
+<mark>this an equivelent highlight in html</mark>
 <
 
 
