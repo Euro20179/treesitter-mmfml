@@ -1,0 +1,33 @@
+{
+  "grammars": [
+    {
+      "name": "mmfml",
+      "camelcase": "mmfml",
+      "scope": "source.mmfml",
+      "path": ".",
+      "file-types": ".mmfml",
+      "injection-regex": "^mmfml$"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "my markup format language",
+    "authors": [
+      {
+        "name": "Euro20179"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/euro20179/treesitter-mmfml"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": false,
+    "node": false,
+    "python": false,
+    "rust": false,
+    "swift": false
+  }
+}
