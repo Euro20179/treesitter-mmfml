@@ -1,0 +1,31 @@
+                                    = mmfml
+
+`mmfml` stands for:
+    my markup format markup language
+
+If you dont like the name then uh, too bad.
+
+===============================================================================
+
+                             = But what's the point
+
+I like a hodgepodge of random markup format syntax.
+So i decided to make a simple grammar for the syntax i like,
+that's what this ~disasterous~ *absolutely wonderful* markup language is for
+
+-------------------------------------------------------------------------------
+
+== A rant about markdown
+
+In my personal opinion,
+markdown can get quite awful to read when there's nothing to render it nicely.
+I want this format to be readable when there's no renderer.
+
+This is also why I'm using this language for the readme file.
+It should look fine even though github won't have a renderer for it
+
+== The flaw with mmfml
+
+As a side note, this format pretty heavily relies on monospace font, so uh yeah
+
+But the user can just set their font if it's not monospace :)
