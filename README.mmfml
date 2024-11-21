@@ -36,7 +36,8 @@ But the user can just set their font if it's not monospace :)
 
     == Requirements
 
-- [tree-sitter-cli] |https://tree-sitter.github.io/tree-sitter/creating-parsers#dependencies|
+- [tree-sitter-cli]
+  |https://tree-sitter.github.io/tree-sitter/creating-parsers#dependencies|
 
     == Downloading + Building
 
@@ -51,6 +52,7 @@ tree-sitter generate
 I just use something like
 
 >lua
+-- see: https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#adding-parsers
 local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
 parser_config.mmfml = {
@@ -63,14 +65,35 @@ parser_config.mmfml = {
     },
     filetype = "mmfml"
 }
+
+--i dont have this in my config, but the above docs say to use it
+vim.treesitter.language.register('mmfml', 'mmfml')
 <
 
 Don't forget to also add
 
 >lua
+--see `:help vim.filetype.add()`
 vim.filetype.add({
     extention = {
         mmfml = "mmfml"
     }
 })
 <
+
+===============================================================================
+
+                                 = Future plans
+
+- It might be nice to have a fallback `.vim` syntax highlighting file.
+  In case I end up in vim or something idk.
+
+- I don't plan on supporting tables until i find a table syntax i like.
+  At the moment i dont like any table syntax,
+  they are all too clunky to work with in a simple way
+
+- Math notation of some kind (though using `>bc` might be plenty fine)
+    - Maybe when i find math notation i like
+      i'll also make a hodgepodge math markup language
+
+- If there's anything else I feel I can't represent, i'll probably add it
