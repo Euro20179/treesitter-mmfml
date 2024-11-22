@@ -87,6 +87,8 @@ It really makes a document look nicer,
 and there's so many because im not sure which kind of dividers i like yet,
 and some divide more than others, eg: `---` is very "weak" compared to `:::`
 
+Spaces may be used in dividers
+
        == Unordered bullets ==
 
 `- top level`

@@ -15,6 +15,7 @@ module.exports = grammar({
       prec(1, $.simple_marked_text),
       $.metadata_tag
     )),
+
     simple_marked_text: $ => prec.left(repeat1(choice(
       $.bold,
       $.italic,
@@ -55,6 +56,7 @@ module.exports = grammar({
             choice(".", "\x29")
           )
         ),
+        /\s/
       )
     ),
 
