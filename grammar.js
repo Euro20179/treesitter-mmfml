@@ -13,6 +13,7 @@ module.exports = grammar({
       prec(10, $.code_block),
       $.list,
       prec(1, $.simple_marked_text),
+      $.metadata_tag
     )),
     simple_marked_text: $ => prec.left(repeat1(choice(
       $.bold,
@@ -27,6 +28,18 @@ module.exports = grammar({
       $.plain,
       $.esc,
     ))),
+
+    metadata_tag: $ => prec.left(seq(
+      ">metadata\n",
+      repeat1(
+        seq(
+          seq(alias($.plain, $.metadata_key), ":"),
+          alias($.plain, $.metadata_value),
+          "\n",
+        )
+      ),
+      "<\n"
+    )),
 
     list: $ => token.immediate(
       seq(
@@ -97,12 +110,12 @@ module.exports = grammar({
       prec.left(token.immediate(seq("\n", repeat(/\s/), "<")))
     ),
 
-    header1: $ => seq("=", $.simple_text, token.immediate(choice("=", "\n"))),
-    header2: $ => seq("==", $.simple_text, token.immediate(choice("==", "\n"))),
-    header3: $ => seq("===", $.simple_text, token.immediate(choice("===", "\n"))),
-    header4: $ => seq("====", $.simple_text, token.immediate(choice("====", "\n"))),
-    header5: $ => seq("=====", $.simple_text, token.immediate(choice("=====", "\n"))),
-    header6: $ => seq("======", $.simple_text, token.immediate(choice("======", "\n"))),
+    header1: $ => seq("=", $.simple_marked_text, token.immediate(choice("=", "\n"))),
+    header2: $ => seq("==", $.simple_marked_text, token.immediate(choice("==", "\n"))),
+    header3: $ => seq("===", $.simple_marked_text, token.immediate(choice("===", "\n"))),
+    header4: $ => seq("====", $.simple_marked_text, token.immediate(choice("====", "\n"))),
+    header5: $ => seq("=====", $.simple_marked_text, token.immediate(choice("=====", "\n"))),
+    header6: $ => seq("======", $.simple_marked_text, token.immediate(choice("======", "\n"))),
 
     footnote_ref: $ => seq(
       alias("^[", $.footnote_start),
