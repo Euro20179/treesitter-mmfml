@@ -160,3 +160,21 @@ quote
 <
 
 putting `word:` before the opening `>` will cause `word:` to be highlighted
+
+        == Metadata ==
+
+Should be at the top of the file, whitespace is critical
+Eventually i'd like to make a seperate parser,
+So that it doesn't need to be hardcoded in the mmfml grammar
+
+`>metadata`
+`Key: value`
+`<`
+
+This syntax is exactly the same as |Code block|
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+>metadata
+Last modified: 2024-11-21
+<
