@@ -2,7 +2,7 @@ module.exports = grammar({
   name: "mmfml",
   rules: {
     source_file: $ => repeat1(choice(
-      $.divider,
+       $.divider,
       $.header1,
       $.header2,
       $.header3,
@@ -49,6 +49,7 @@ module.exports = grammar({
       seq(
         repeat1(
           choice(
+            " ",
             "=",
             "-",
             "+",
@@ -129,6 +130,6 @@ module.exports = grammar({
     anchor: $ => seq(alias("#", $.anchor_start), $.simple_marked_text, alias("#", $.anchor_end)),
 
     plain: $ => prec.right(repeat1(choice(/\s/, /./))),
-    simple_text: $ => /[^\n]+/
+    // simple_text: $ => /[^\n=]+/
   },
 })
