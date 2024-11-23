@@ -11,7 +11,6 @@ It is a markup format *made* to be displayed inside neovim
 
 |=============================================================================|
 
-
                                    = Syntax =
 
 Whitespace at the start of a line is ignored

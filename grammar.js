@@ -45,17 +45,14 @@ module.exports = grammar({
 
     list: $ => token.immediate(
       seq(
-        repeat1(/\s/),
+        "\n",
+        repeat(/\s/),
         choice(
           choice("-", "•"),
           seq(
-            repeat1(/\d/),
+            repeat1(/\w/),
             choice(".", "\x29") //29 is close paren
           ),
-          seq(
-            repeat1(/[A-Za-z]/),
-            choice(".", "\x29")
-          )
         ),
         /\s/
       )
