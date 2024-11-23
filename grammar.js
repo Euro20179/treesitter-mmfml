@@ -42,6 +42,7 @@ module.exports = grammar({
       "<\n"
     )),
 
+
     list: $ => token.immediate(
       seq(
         repeat1(/\s/),
@@ -61,13 +62,17 @@ module.exports = grammar({
     ),
 
     divider: $ => token.immediate(
-      repeat1(
-        seq(
-          choice("=", "-", "+", "_", ":", "—", "–", "‗", "‾", "━"),
-          choice("=", "-", "+", "_", ":", "—", "–", "‗", "‾", "━"),
-          choice("=", "-", "+", "_", ":", "—", "–", "‗", "‾", "━"),
-          // repeat1(/[=\-\+_:]+/),
-        )
+      seq(
+        optional(choice("<", "|")),
+        repeat1(
+          seq(
+            choice("=", "-", "+", "_", ":", "—", "–", "‗", "‾", "━"),
+            choice("=", "-", "+", "_", ":", "—", "–", "‗", "‾", "━"),
+            repeat1(choice("=", "-", "+", "_", ":", "—", "–", "‗", "‾", "━"))
+            // repeat1(/[=\-\+_:]+/),
+          )
+        ),
+        optional(choice(">", "|"))
       )
     ),
 

@@ -9,7 +9,7 @@ This text is only structured so that a treesitter parser can parse it
 It is not meant to be converted to html or something viewed
 It is a markup format *made* to be displayed inside neovim
 
-===============================================================================
+|=============================================================================|
 
 
                                    = Syntax =
@@ -87,7 +87,11 @@ It really makes a document look nicer,
 and there's so many because im not sure which kind of dividers i like yet,
 and some divide more than others, eg: `---` is very "weak" compared to `:::`
 
-Spaces may be used in dividers
+Spaces may be used in dividers.
+/
+    note: A divider may have a `|` the ends of it
+    it can also have a `<` at the start and `>` at the end
+/
 
        == Unordered bullets ==
 
