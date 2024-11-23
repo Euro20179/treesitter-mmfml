@@ -131,9 +131,9 @@ module.exports = grammar({
         $.simple_marked_text,
         "]"
       )),
-      token.immediate("|"),
-      alias(/[^|\n]+/, $.link_url),
-      "|"
+      token.immediate(seq("|", repeat(" "))),
+      alias(prec.left(repeat1(/[^|\n]/)), $.link_url),
+      token.immediate(seq(repeat(" "), "|"))
     ),
 
     bold: $ => seq(alias("*", $.bold_start), $.simple_marked_text, alias("*", $.bold_end)),
