@@ -2,7 +2,6 @@ module.exports = grammar({
   name: "mmfml",
   rules: {
     source_file: $ => repeat1(choice(
-       $.divider,
       $.header1,
       $.header2,
       $.header3,
@@ -17,6 +16,7 @@ module.exports = grammar({
     )),
 
     simple_marked_text: $ => prec.left(repeat1(choice(
+      $.divider,
       $.bold,
       $.italic,
       $.strikethrough,
@@ -61,24 +61,13 @@ module.exports = grammar({
     ),
 
     divider: $ => token.immediate(
-      seq(
-        repeat1(
-          choice(
-            " ",
-            "=",
-            "-",
-            "+",
-            "_",
-            ":",
-            "—",
-            "–",
-            "‗",
-            "‾",
-            "━",
-          )
-        ),
-        // repeat1(/[=\-\+_:]+/),
-        "\n"
+      repeat1(
+        seq(
+          choice("=", "-", "+", "_", ":", "—", "–", "‗", "‾", "━"),
+          choice("=", "-", "+", "_", ":", "—", "–", "‗", "‾", "━"),
+          choice("=", "-", "+", "_", ":", "—", "–", "‗", "‾", "━"),
+          // repeat1(/[=\-\+_:]+/),
+        )
       )
     ),
 
