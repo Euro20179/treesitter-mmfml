@@ -161,8 +161,6 @@ This way the user to format the text however they see fit
     quote
     <
 
-    putting `word:` before the opening `>` will cause `word:` to be highlighted
-
 == Metadata ==
 
     Should be at the top of the file, whitespace is critical
