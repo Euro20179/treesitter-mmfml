@@ -135,7 +135,22 @@ module.exports = grammar({
     higlight: $ => seq(alias("+", $.higlight_start), $.simple_marked_text, alias("+", $.higlight_end)),
     anchor: $ => seq(alias("#", $.anchor_start), $.simple_marked_text, alias("#", $.anchor_end)),
 
-    plain: $ => prec.right(repeat1(choice(/\s/, /./))),
+    plain: $ => prec.right(
+      repeat1(
+        choice(
+          /\s/,
+          //this nonsense here lets the user select words and
+          //highlight specific words as special if they want
+          //basically it creates a node that is whitespace diliminated
+          prec.right(
+            alias(
+              repeat1(/[^\s]/),
+              $.word
+            )
+          )
+        )
+      )
+    ),
     // simple_text: $ => /[^\n=]+/
   },
 })
