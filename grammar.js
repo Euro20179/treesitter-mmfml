@@ -103,12 +103,12 @@ module.exports = grammar({
       prec.left(token.immediate(seq("\n", repeat(/\s/), "<")))
     ),
 
-    header1: $ => seq("=", $.simple_marked_text, token.immediate(choice("=", "\n"))),
-    header2: $ => seq("==", $.simple_marked_text, token.immediate(choice("==", "\n"))),
-    header3: $ => seq("===", $.simple_marked_text, token.immediate(choice("===", "\n"))),
-    header4: $ => seq("====", $.simple_marked_text, token.immediate(choice("====", "\n"))),
-    header5: $ => seq("=====", $.simple_marked_text, token.immediate(choice("=====", "\n"))),
-    header6: $ => seq("======", $.simple_marked_text, token.immediate(choice("======", "\n"))),
+    header1: $ => seq("=", $.plain, token.immediate(choice("=", "\n"))),
+    header2: $ => seq("==", $.plain, token.immediate(choice("==", "\n"))),
+    header3: $ => seq("===", $.plain, token.immediate(choice("===", "\n"))),
+    header4: $ => seq("====", $.plain, token.immediate(choice("====", "\n"))),
+    header5: $ => seq("=====", $.plain, token.immediate(choice("=====", "\n"))),
+    header6: $ => seq("======", $.plain, token.immediate(choice("======", "\n"))),
 
     footnote_ref: $ => seq(
       alias("^[", $.footnote_start),
