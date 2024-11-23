@@ -1,4 +1,4 @@
-                                   = intro =
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Intro ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 The point of this markup format is that indentation whitespace doesn't matter
 
@@ -9,175 +9,167 @@ This text is only structured so that a treesitter parser can parse it
 It is not meant to be converted to html or something viewed
 It is a markup format *made* to be displayed inside neovim
 
-|=============================================================================|
-
-                                   = Syntax =
+|=================================== Syntax ==================================|
 
 Whitespace at the start of a line is ignored
 This way the user to format the text however they see fit
 
-        == Esc ==
+== Esc ==
 
-Any special character can be escaped with `\`
+    Any special character can be escaped with `\`
 
-        == Bold ==
+== Bold ==
 
-`*text*`
-
-
-        == Italic ==
-
-`/text/`
+    `*text*`
 
 
-        == Underline ==
+== Italic ==
 
-`_text_`
-
-        == Strikethrough ==
-
-`~text~` or `-text-`
-
-        == Links ==
-
-`[shown text]|the link|`
-
-`the link` can be an |Anchor|, name of a |Header|, `https?://` or a path to a file
-`[shown text]` is optional
+    `/text/`
 
 
-       == Highlight/mark ==
+== Underline ==
 
-`+this is a highlight+`
+    `_text_`
 
->html
-<mark>this an equivelent highlight in html</mark>
-<
+== Strikethrough ==
 
+    `~text~` or `-text-`
 
-       == Header ==
+== Links ==
 
-H1: = text =
-H2: == text ==
-H3: === text ===
-.
-.
-H6: ====== text ======
+    `[shown text]|the link|`
 
-The ending `=` are optional
+    `the link` can be an |Anchor|, name of a |Header|, `https?://` or a path to a file
+    `[shown text]` is optional
 
 
-       == Dividers ==
+== Highlight/marks ==
 
-`=========`
-`---------`
-`++++++++`
-`________`
-`::::::::`
-`————————`
-`––––––––`
-`‗‗‗‗‗‗‗‗`
-`‾‾‾‾‾‾‾‾`
-`━━━━━━━━`
+    `+this is a highlight+`
 
-A divider is only given syntatic meaning in order to encourage the use of them
-
-It really makes a document look nicer,
-and there's so many because im not sure which kind of dividers i like yet,
-and some divide more than others, eg: `---` is very "weak" compared to `:::`
-
-Spaces may be used in dividers.
-/
-    note: A divider may have a `|` the ends of it
-    it can also have a `<` at the start and `>` at the end
-/
-
-       == Unordered bullets ==
-
-`- top level`
-    `- next level (interally this is still top level
-      because whitespace is ignored)`
-`•` may also be used
+    >html
+    <mark>this an equivelent highlight in html</mark>
+    <
 
 
-      == Ordered bullets ==
+== Header ==
 
-`1. top level`
-    `a. next level`
-        `i. next level`
+    H1: = text =
+    H2: == text ==
+    H3: === text ===
+    .
+    .
+    H6: ====== text ======
 
-*NOTE*: The user is expected to number themselves
-
-
-      == Tables ==
-
->markdown
-Column 1 | Column 2
----------|---------
-Data 1   | Data 2
-<
-
-Yeah uh, there is no table, it's too much effort,
-if you want a table, use a markdown block,
-or dont since it really doesn't matter that much
+    The ending `=` are optional
 
 
+== Dividers ==
 
-      == Anchor ==
+    `=========`
+    `---------`
+    `++++++++`
+    `________`
+    `::::::::`
+    `————————`
+    `––––––––`
+    `‗‗‗‗‗‗‗‗`
+    `‾‾‾‾‾‾‾‾`
+    `━━━━━━━━`
 
-An anchor can be any header OR, marked with `#anchor#`
+    A divider is only given syntatic meaning in order to encourage the use of them
+
+    It really makes a document look nicer,
+    and there's so many because im not sure which kind of dividers i like yet,
+    and some divide more than others, eg: `---` is very "weak" compared to `:::`
+
+    Spaces may be used in dividers.
+    /
+        note: A divider may have a `|` the ends of it
+        it can also have a `<` at the start and `>` at the end
+    /
+
+== Unordered bullets ==
+
+    `- top level`
+        `- next level (interally this is still top level
+          because whitespace is ignored)`
+    `•` may also be used
 
 
-      == Footnotes ==
+== Ordered bullets ==
 
-You can link to a footnote with `^[text]` where `text` may be any text
-To create the actual footnote text, use
->
-^[1]:
-    The footnote goes here
-[/1]
-<
+    `1. top level`
+        `a. next level`
+            `i. next level`
 
-To link to a footnote do `^[1]`
+    *NOTE*: The user is expected to number themselves
+
+
+== Tables ==
+
+    >markdown
+    Column 1 | Column 2
+    ---------|---------
+    Data 1   | Data 2
+    <
+
+    Yeah uh, there is no table, it's too much effort,
+    if you want a table, use a markdown block,
+    or dont since it really doesn't matter that much
 
 
 
-       == Code snippet ==
-`markup in here is ignored`
+== Anchor ==
+
+    An anchor can be any header OR, marked with `#anchor#`
 
 
-       == Code block ==
->Language
-markup in here is also ignored
-<
+== Footnotes ==
 
-eg:
->python
-print("Hello")
-<
+    You can link to a footnote with `^[text]` where `text` may be any text
+    To create the actual footnote text, use
+    >
+    ^[1]:
+        The footnote goes here
+    [/1]
+    <
 
-This can also be used to make a plain quote:
+    To link to a footnote do `^[1]`
 
->
-quote
-<
 
-putting `word:` before the opening `>` will cause `word:` to be highlighted
 
-        == Metadata ==
+== Code snippet ==
+    `markup in here is ignored`
 
-Should be at the top of the file, whitespace is critical
-Eventually i'd like to make a seperate parser,
-So that it doesn't need to be hardcoded in the mmfml grammar
 
-`>metadata`
-`Key: value`
-`<`
+== Code block ==
+    >Language
+    markup in here is also ignored
+    <
 
-This syntax is exactly the same as |Code block|
+    eg:
+    >python
+    print("Hello")
+    <
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    This can also be used to make a plain quote:
 
->metadata
-Last modified: 2024-11-21
-<
+    >
+    quote
+    <
+
+    putting `word:` before the opening `>` will cause `word:` to be highlighted
+
+== Metadata ==
+
+    Should be at the top of the file, whitespace is critical
+    Eventually i'd like to make a seperate parser,
+    So that it doesn't need to be hardcoded in the mmfml grammar
+
+    `>metadata`
+    `Key: value`
+    `<`
+
+    This syntax is exactly the same as |Code block|
