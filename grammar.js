@@ -48,13 +48,13 @@ module.exports = grammar({
         "\n",
         repeat(/\s/),
         choice(
-          choice("-", "•"),
+          choice("-", "•", "*"),
           seq(
             repeat1(/\w/),
             choice(".", "\x29") //29 is close paren
           ),
         ),
-        /\s/
+        /\s/,
       )
     ),
 
