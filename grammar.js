@@ -60,7 +60,7 @@ module.exports = grammar({
 
     divider: $ => token.immediate(
       seq(
-        optional(choice("<", "|")),
+        optional(choice("<", "|", "├", "┣")),
         repeat1(
           seq(
             /[=\-+_:—–‗‾━─~]/,
@@ -69,7 +69,7 @@ module.exports = grammar({
             // repeat1(/[=\-\+_:]+/),
           )
         ),
-        optional(choice(">", "|"))
+        optional(choice(">", "|", "┤", "┫"))
       )
     ),
 
