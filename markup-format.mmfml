@@ -192,11 +192,10 @@ This way the user to format the text however they see fit
     print("Hello")
     <
 
-    This can also be used to make a plain quote:
+    As many `>` can be used at the start as you like,
+    as long as there is the same number of `<` at the end.
 
-    >
-    quote
-    <
+    This allows for nesting.
 
 
 == Metadata ==
