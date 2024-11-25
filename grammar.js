@@ -3,15 +3,11 @@ module.exports = grammar({
   externals: $ => [
     $._code_block_start,
     $._code_block_end,
+    $._header,
   ],
   rules: {
     source_file: $ => repeat1(choice(
-      $.header1,
-      $.header2,
-      $.header3,
-      $.header4,
-      $.header5,
-      $.header6,
+      $.header,
       $.footnote_block,
       prec(10, $.code_block),
       $.list,
@@ -47,6 +43,7 @@ module.exports = grammar({
       "<\n"
     )),
 
+    header: $ => $._header,
 
     list: $ => token.immediate(
       seq(
@@ -108,13 +105,6 @@ module.exports = grammar({
       alias(repeat1(/.+/), $.code_text),
       alias($._code_block_end, $.code_block_end)
     ),
-
-    header1: $ => seq("=", $.plain, token.immediate(choice("=", "\n"))),
-    header2: $ => seq("==", $.plain, token.immediate(choice("==", "\n"))),
-    header3: $ => seq("===", $.plain, token.immediate(choice("===", "\n"))),
-    header4: $ => seq("====", $.plain, token.immediate(choice("====", "\n"))),
-    header5: $ => seq("=====", $.plain, token.immediate(choice("=====", "\n"))),
-    header6: $ => seq("======", $.plain, token.immediate(choice("======", "\n"))),
 
     footnote_ref: $ => seq(
       alias("^[", $.footnote_start),

@@ -84,9 +84,11 @@ This way the user to format the text however they see fit
     H3: === text ===
     .
     .
-    H6: ====== text ======
+    .
 
-    The ending `=` are optional
+    - The ending `=` are optional.
+    - there can be as many `=` as you want.
+        - this conflicts with the `=` |Dividers|, but i think it's fine
 
 
 == Anchor ==
@@ -175,7 +177,7 @@ This way the user to format the text however they see fit
     or dont since it really doesn't matter that much
 
 
---------------------------------- Code Stuff ----------------------------------
+================================= Code Stuff ==================================
 
 
 == Code snippet ==

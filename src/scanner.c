@@ -1,4 +1,5 @@
 #include "./tree_sitter/parser.h"
+#include <stdlib.h>
 #include <wctype.h>
 
 typedef struct {
@@ -8,6 +9,8 @@ typedef struct {
 enum TokenType {
     CODE_BLOCK_START,
     CODE_BLOCK_END,
+
+    HEADER
 };
 
 static inline void consume(TSLexer *lexer) {
@@ -97,6 +100,39 @@ static bool scan_block_end(Scanner* scanner, TSLexer* lexer) {
     return false;
 }
 
+static bool scan_header(Scanner* scanner, TSLexer* lexer) {
+    bool foundNewLine = false;
+    while(iswspace(lexer->lookahead)) {
+        if(lexer->lookahead == '\n') {
+            foundNewLine = true;
+        }
+        skip(lexer);
+    }
+
+    //make sure the header is the first non-whitespace thing on the line
+    if(!foundNewLine) {
+        return false;
+    }
+
+    if(lexer->lookahead != '=') {
+        return false;
+    }
+
+    uint8_t level = consume_and_count_char('=', lexer);
+
+    while(lexer->lookahead != '\n') {
+        if(lexer->lookahead == '=') {
+            uint8_t endEqCount = consume_and_count_char('=', lexer);
+            if(endEqCount == level) {
+                return true;
+            }
+        } else {
+            consume(lexer);
+        }
+    }
+    return true;
+}
+
 bool tree_sitter_mmfml_external_scanner_scan(void *payload, TSLexer* lexer, const bool *valid_symbols) {
     Scanner *scanner = (Scanner*)payload;
 
@@ -108,6 +144,11 @@ bool tree_sitter_mmfml_external_scanner_scan(void *payload, TSLexer* lexer, cons
 
     if(valid_symbols[CODE_BLOCK_START] && scan_block_start(scanner, lexer)) {
         lexer->result_symbol = CODE_BLOCK_START;
+        return true;
+    }
+
+    if(valid_symbols[HEADER] && scan_header(scanner, lexer)) {
+        lexer->result_symbol = HEADER;
         return true;
     }
 
