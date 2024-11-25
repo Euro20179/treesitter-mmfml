@@ -23,6 +23,7 @@ module.exports = grammar({
       $.underline,
       $.pre_sample,
       $.link,
+      $.box,
       $.higlight,
       $.footnote_ref,
       $.anchor,
@@ -116,12 +117,9 @@ module.exports = grammar({
       alias("]", $.footnote_end)
     ),
 
+    box: $ => seq("[", $.simple_marked_text, "]"),
+
     link: $ => seq(
-      optional(seq(
-        "[",
-        $.simple_marked_text,
-        "]"
-      )),
       token.immediate(seq("|", repeat(" "))),
       alias(prec.left(repeat1(/[^|\n]/)), $.link_url),
       token.immediate(seq(repeat(" "), "|"))

@@ -49,11 +49,24 @@ This way the user to format the text however they see fit
     <mark>this an equivelent highlight in html</mark>
     <
 
+== Box ==
+    `[this is a box]`
+    It has no syntatic meaning,
+    and is only given meaning by a highligher or renderer if it wants to.
+
+    For example, with my neovim treesitter highlights i have:
+    - Checked list item
+        `- [x]`
+    - Unchecked list item
+        `- [ ]`
+    - Link label
+        `[wikipedia]|https://wikipedia.org|`
+
 ----------------------------------- Anchors -----------------------------------
 
 == Links ==
 
-    `[shown text]|the link|`
+    `|the link|`
 
     `the link` can be
         - |Anchor|
@@ -61,8 +74,8 @@ This way the user to format the text however they see fit
         - |Footnote|
         - `https?://`
         - path to a file
-    `[shown text]` is optional
 
+    also see |Box|
 
 == Header ==
 
