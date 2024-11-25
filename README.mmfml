@@ -58,7 +58,7 @@ But the user can just set their font if it's not monospace :)
     parser_config.mmfml = {
         install_info = {
             url = "/path/to/cloned-directory",
-            files = { "src/parser.c" },
+            files = { "src/parser.c", "src/scanner.c" },
             branch = "master",
             generate_requires_npm = false,
             requires_generate_from_grammar = false
