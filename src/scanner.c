@@ -67,6 +67,14 @@ static bool scan_block_start(Scanner* scanner, TSLexer *lexer) {
         if(level > 0) {
             scanner->level_count = level;
         }
+
+        //disallow whitespace after > unless it is a new line
+        //this prevents `x > y` being treated as a codeblock start
+        //or even `x --> y`
+        if(iswspace(lexer->lookahead) && lexer->lookahead != '\n') {
+            return false;
+        }
+
         return true;
     }
     return false;
