@@ -98,6 +98,7 @@ This way the user to format the text however they see fit
 
     You can link to a footnote with `^[text]`, or `|text|` where `text` may be any text
     To create the actual footnote text, use
+
     >
     ^[1]:
         The footnote goes here

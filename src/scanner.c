@@ -1,4 +1,5 @@
 #include "./tree_sitter/parser.h"
+#include <wctype.h>
 
 typedef struct {
   uint8_t level_count;
@@ -72,6 +73,9 @@ static bool scan_block_start(Scanner* scanner, TSLexer *lexer) {
 }
 
 static bool scan_block_end(Scanner* scanner, TSLexer* lexer) {
+    while(iswspace(lexer->lookahead)) {
+        skip(lexer);
+    }
     if(consume_char('<', lexer)) {
         uint8_t level = consume_and_count_char('<', lexer);
 
