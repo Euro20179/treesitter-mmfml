@@ -11,7 +11,7 @@ If you dont like the name then uh, too bad.
 
 I like a hodgepodge of random markup format syntax.
 So i decided to make a simple grammar for the syntax i like,
-that's what this ~disasterous~ *absolutely wonderful* markup language is for
+that's what this ~disasterous~ *absolutely wonderful* markup language is for.
 
 -------------------------------------------------------------------------------
 
@@ -52,33 +52,33 @@ But the user can just set their font if it's not monospace :)
     I just use something like
 
     >lua
-    -- see: https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#adding-parsers
-    local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+        -- see: https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#adding-parsers
+        local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
-    parser_config.mmfml = {
-        install_info = {
-            url = "/path/to/cloned-directory",
-            files = { "src/parser.c", "src/scanner.c" },
-            branch = "master",
-            generate_requires_npm = false,
-            requires_generate_from_grammar = false
-        },
-        filetype = "mmfml"
-    }
+        parser_config.mmfml = {
+            install_info = {
+                url = "/path/to/cloned-directory",
+                files = { "src/parser.c", "src/scanner.c" },
+                branch = "master",
+                generate_requires_npm = false,
+                requires_generate_from_grammar = false
+            },
+            filetype = "mmfml"
+        }
 
-    --i dont have this in my config, but the above docs say to use it
-    vim.treesitter.language.register('mmfml', 'mmfml')
+        --i dont have this in my config, but the above docs say to use it
+        vim.treesitter.language.register('mmfml', 'mmfml')
     <
 
     Don't forget to also add
 
     >lua
-    --see `:help vim.filetype.add()`
-    vim.filetype.add({
-        extention = {
-            mmfml = "mmfml"
-        }
-    })
+        --see `:help vim.filetype.add()`
+        vim.filetype.add({
+            extention = {
+                mmfml = "mmfml"
+            }
+        })
     <
 
     I also have an [ftplugin]
