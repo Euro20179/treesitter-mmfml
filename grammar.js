@@ -1,5 +1,9 @@
 module.exports = grammar({
   name: "mmfml",
+  externals: $ => [
+    $._code_block_start,
+    $._code_block_end,
+  ],
   rules: {
     source_file: $ => repeat1(choice(
       $.header1,
@@ -95,13 +99,14 @@ module.exports = grammar({
     ),
 
     code_block: $ => seq(
-      alias(">", $.code_block_start_arrow),
+      alias($._code_block_start, $.code_block_start),
+      // alias(">", $.code_block_start_arrow),
       choice(
         field("language", alias(token.immediate(/[A-Za-z0-9]+\n/), $.language)),
         token.immediate(/\n/)
       ),
       alias(repeat1(/.+/), $.code_text),
-      prec.left(token.immediate(seq("\n", repeat(/\s/), "<")))
+      alias($._code_block_end, $.code_block_end)
     ),
 
     header1: $ => seq("=", $.plain, token.immediate(choice("=", "\n"))),
