@@ -10,7 +10,8 @@ enum TokenType {
     CODE_BLOCK_START,
     CODE_BLOCK_END,
 
-    HEADER
+    HEADER,
+    SOF_HEADER
 };
 
 static inline void consume(TSLexer *lexer) {
@@ -100,7 +101,7 @@ static bool scan_block_end(Scanner* scanner, TSLexer* lexer) {
     return false;
 }
 
-static bool scan_header(Scanner* scanner, TSLexer* lexer) {
+static bool scan_header(bool require_newline, TSLexer* lexer) {
     bool foundNewLine = false;
     while(iswspace(lexer->lookahead)) {
         if(lexer->lookahead == '\n') {
@@ -110,7 +111,7 @@ static bool scan_header(Scanner* scanner, TSLexer* lexer) {
     }
 
     //make sure the header is the first non-whitespace thing on the line
-    if(!foundNewLine) {
+    if(!foundNewLine && require_newline) {
         return false;
     }
 
@@ -147,7 +148,11 @@ bool tree_sitter_mmfml_external_scanner_scan(void *payload, TSLexer* lexer, cons
         return true;
     }
 
-    if(valid_symbols[HEADER] && scan_header(scanner, lexer)) {
+    if(valid_symbols[SOF_HEADER] && scan_header(false, lexer)) {
+        lexer->result_symbol = SOF_HEADER;
+        return true;
+    }
+    if(valid_symbols[HEADER] && scan_header(true, lexer)) {
         lexer->result_symbol = HEADER;
         return true;
     }

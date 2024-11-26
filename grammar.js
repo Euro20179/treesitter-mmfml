@@ -4,16 +4,20 @@ module.exports = grammar({
     $._code_block_start,
     $._code_block_end,
     $._header,
+    $._sof_header,
   ],
   rules: {
-    source_file: $ => repeat1(choice(
-      $.header,
-      $.footnote_block,
-      prec(10, $.code_block),
-      $.list,
-      prec(1, $.simple_marked_text),
-      $.metadata_tag
-    )),
+    source_file: $ => seq(
+      optional($.sof_header),
+      repeat1(choice(
+        $.header,
+        $.footnote_block,
+        prec(10, $.code_block),
+        $.list,
+        prec(1, $.simple_marked_text),
+        $.metadata_tag
+      ))
+    ),
 
     simple_marked_text: $ => prec.left(repeat1(choice(
       $.divider,
@@ -44,6 +48,8 @@ module.exports = grammar({
     )),
 
     header: $ => $._header,
+
+    sof_header: $ => alias($._sof_header, $.header),
 
     list: $ => token.immediate(
       seq(
