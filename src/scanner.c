@@ -121,6 +121,7 @@ static bool scan_header(bool require_newline, TSLexer* lexer) {
 
     uint8_t level = consume_and_count_char('=', lexer);
 
+    bool foundText = false;
     while(lexer->lookahead != '\n') {
         if(lexer->lookahead == '=') {
             uint8_t endEqCount = consume_and_count_char('=', lexer);
@@ -128,10 +129,11 @@ static bool scan_header(bool require_newline, TSLexer* lexer) {
                 return true;
             }
         } else {
+            foundText = true;
             consume(lexer);
         }
     }
-    return true;
+    return foundText;
 }
 
 bool tree_sitter_mmfml_external_scanner_scan(void *payload, TSLexer* lexer, const bool *valid_symbols) {
