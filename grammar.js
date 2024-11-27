@@ -86,7 +86,8 @@ module.exports = grammar({
       alias(seq(
         "\n^[",
         alias($.footnote_name_text, $.footnote_block_name),
-        "]:\n"
+        "]:",
+        /\s+/,
       ), $.footnote_start),
       // repeat1($.simple_marked_text),
       // seq(
