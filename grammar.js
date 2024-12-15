@@ -33,7 +33,14 @@ module.exports = grammar({
       $.anchor,
       $.plain,
       $.esc,
+      $.inline_code
     ))),
+
+    inline_code: $ => seq(
+      "$", optional(alias(repeat1(/\w/), $.language)), "$",
+      alias(repeat1(/[^\$\n]/), $.code),
+      "$$"
+    ),
 
     metadata_tag: $ => prec.left(seq(
       ">metadata\n",

@@ -180,8 +180,16 @@ This way the user to format the text however they see fit
 ================================= Code Stuff ==================================
 
 
-== Code snippet ==
+== Plain snippet ==
     `markup in here is ignored`
+
+== Code snippet ==
+    $python$
+    "markup in here is also ignored, it's an inline version of the code block"
+    $$
+
+    (/ NOTE: the language is optional,
+        the user should set what the default language should be /) 
 
 
 == Code block ==
