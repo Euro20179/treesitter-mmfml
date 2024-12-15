@@ -33,7 +33,7 @@ static inline bool consume_char(char c, TSLexer *lexer) {
 
 static inline uint8_t consume_and_count_char(char c, TSLexer *lexer) {
   uint8_t count = 0;
-  while (lexer->lookahead == c) {
+  while (lexer->lookahead == c && !lexer->eof(lexer)) {
     ++count;
     consume(lexer);
   }
@@ -85,7 +85,7 @@ static bool scan_block_start(Scanner* scanner, TSLexer *lexer) {
 }
 
 static bool scan_block_end(Scanner* scanner, TSLexer* lexer) {
-    while(iswspace(lexer->lookahead)) {
+    while(iswspace(lexer->lookahead) && !lexer->eof(lexer)) {
         skip(lexer);
     }
     if(consume_char('<', lexer)) {
@@ -103,7 +103,7 @@ static bool scan_block_end(Scanner* scanner, TSLexer* lexer) {
 
 static bool scan_header(bool require_newline, TSLexer* lexer) {
     bool foundNewLine = false;
-    while(iswspace(lexer->lookahead)) {
+    while(iswspace(lexer->lookahead) && !lexer->eof(lexer)) {
         if(lexer->lookahead == '\n') {
             foundNewLine = true;
         }
@@ -122,7 +122,7 @@ static bool scan_header(bool require_newline, TSLexer* lexer) {
     uint8_t level = consume_and_count_char('=', lexer);
 
     bool foundText = false;
-    while(lexer->lookahead != '\n') {
+    while(lexer->lookahead != '\n' && !lexer->eof(lexer)) {
         if(lexer->lookahead == '=') {
             uint8_t endEqCount = consume_and_count_char('=', lexer);
             if(endEqCount == level) {
