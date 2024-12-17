@@ -37,7 +37,7 @@ module.exports = grammar({
     ))),
 
     inline_code: $ => seq(
-      alias(seq("$", optional(alias(repeat1(/\w/), $.language)), "$",), $.inline_code_start),
+      alias(token.immediate(seq("$", optional(repeat1(/\w/)), "$",)), $.inline_code_start),
       alias(repeat1(/[^\$\n]/), $.code),
       alias("$$", $.inline_code_end)
     ),
