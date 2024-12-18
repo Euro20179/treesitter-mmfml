@@ -53,7 +53,10 @@ module.exports = grammar({
         choice(
           choice("-", "•", "*", "+"),
           seq(
-            repeat1(/\w/),
+            choice(
+              repeat1(/\p{Number}/),
+              /\p{Letter}/,
+            ),
             choice(".", "\x29") //29 is close paren
           ),
         ),
