@@ -171,8 +171,7 @@ This way the user to format the text however they see fit
         - `|`
 
     In order to be classified as a divider,
-    at least 3 divider characters must appear in a row
-    as a consequence strings such as: `:-_` count as dividers
+    at least 3 of the same divider characters must appear in a row
 
 
 == Unordered bullets ==                                                 #lists#

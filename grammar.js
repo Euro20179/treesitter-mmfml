@@ -68,14 +68,56 @@ module.exports = grammar({
     divider: $ => token.immediate(
       seq(
         optional(choice("<", "|", "├", "┣")),
-        repeat1(
-          seq(
-            /[=\-+_:—–‗‾━─~]/,
-            /[=\-+_:—–‗‾━─~]/,
-            repeat1(/[=\-+_:—–‗‾━─~]/)
-            // repeat1(/[=\-\+_:]+/),
+        choice(
+          repeat1(
+            seq("==", repeat1("="))
+          ),
+          repeat1(
+            //at least 4 dots because ... is ellipses
+            seq("...", repeat1("."))
+          ),
+          repeat1(
+            seq("--", repeat1("-"))
+          ),
+          repeat1(
+            seq("++", repeat1("+"))
+          ),
+          repeat1(
+            seq("__", repeat1("_"))
+          ),
+          repeat1(
+            seq("::", repeat1(":"))
+          ),
+          repeat1(
+            seq("——", repeat1("—"))
+          ),
+          repeat1(
+            seq("––", repeat1("–"))
+          ),
+          repeat1(
+            seq("‗‗", repeat1("‗"))
+          ),
+          repeat1(
+            seq("‾‾", repeat1("‾"))
+          ),
+          repeat1(
+            seq("━━", repeat1("━"))
+          ),
+          repeat1(
+            seq("──", repeat1("─"))
+          ),
+          repeat1(
+            seq("~~", repeat1("~"))
           )
         ),
+        // repeat1(
+        //   seq(
+        //     /[=\-+_:—–‗‾━─~]/,
+        //     /[=\-+_:—–‗‾━─~]/,
+        //     repeat1(/[=\-+_:—–‗‾━─~]/)
+        //     // repeat1(/[=\-\+_:]+/),
+        //   )
+        // ),
         optional(choice(">", "|", "┤", "┫"))
       )
     ),
@@ -167,8 +209,8 @@ module.exports = grammar({
                 $.word
               ),
               alias(
-              repeat1(/\P{Letter}/),
-              $.non_word
+                repeat1(/\P{Letter}/),
+                $.non_word
               )
             )
           )
