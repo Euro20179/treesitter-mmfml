@@ -44,6 +44,7 @@ But the user can just set their font if it's not monospace :)
     >sh
     git clone https://github.com/euro20179/treesitter-mmfml
     cd treesitter-mmfml
+    make
     tree-sitter generate
     <
 
