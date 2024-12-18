@@ -21,6 +21,14 @@ This way the user to format the text however they see fit
 
 -------------------------------- Basic Markup ---------------------------------
 
+== Word ==
+    Any character(s) in the `Letter` unicode category seperated by
+    other markup
+
+== Non Word ==                                                       #non-word#
+    Any character(s) *not* in the `letter` unicode category seperated by
+    other markup
+
 == Esc ==
 
     Any special character can be escaped with `\`
@@ -52,11 +60,18 @@ This way the user to format the text however they see fit
 == Basic quotes ==
 
     `‘this is a quote’`
-    Any puncutation in these unicode categories can be used:
-        - `Initial_Punctuation`
-        - `Final_Punctuation`
 
-    Also see |advanced-quotes|
+    Any puncutation in these unicode categories can be used:
+        - `Initial_Punctuation` ∪ `「`
+        - `Final_Punctuation` ∪ `」`
+            - for some reason japanese quotes are not part of
+              unicode punctuation
+
+    Optionally, after the quote a `- author` may be given
+    This may be seperated by any amount of whitespace.
+
+    `~`, `—`, `–`, and `-` may be used as author markers
+    *NOTE*: `-` only works on same line due to |lists|
 
 == Box ==
     `[this is a box]`
@@ -101,7 +116,6 @@ This way the user to format the text however they see fit
 
 
 == Anchor ==
-
     An anchor can be any header OR, marked with `#anchor#`
 
 
@@ -199,18 +213,6 @@ This way the user to format the text however they see fit
     if you want a table, use a markdown block,
     or dont since it really doesn't matter that much
 
-== Advanced Quotes ==                                         #advanced-quotes#
-
-    `‘the quote’ ~ author`
-    This may be spread out over multiple lines as such
-    >mmfml
-    ‘the quote’
-    ~ the author
-    <
-
-    `~`, `—`, `–`, and `-` may be used as author markers
-    *NOTE*: `-` only works on same line due to |lists|
-
 
 ================================= Code Stuff ==================================
 
@@ -225,7 +227,10 @@ This way the user to format the text however they see fit
 
     *NOTE*:
         the language is optional,
-        the user should set what the default language should be /) 
+        the user should set what the default language should be
+
+    The point of this is that it can be $text$ inline $$,
+    unlike |Code block|
 
 
 == Code block ==
@@ -242,16 +247,3 @@ This way the user to format the text however they see fit
     as long as there is the same number of `<` at the end.
 
     This allows for nesting.
-
-
-== Metadata ==
-
-    Should be at the top of the file, whitespace is critical
-    Eventually i'd like to make a seperate parser,
-    So that it doesn't need to be hardcoded in the mmfml grammar
-
-    `>metadata`
-    `Key: value`
-    `<`
-
-    This syntax is exactly the same as |Code block|
