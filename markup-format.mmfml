@@ -49,6 +49,15 @@ This way the user to format the text however they see fit
     <mark>this an equivelent highlight in html</mark>
     <
 
+== Basic quotes ==
+
+    `‘this is a quote’`
+    Any puncutation in these unicode categories can be used:
+        - `Initial_Punctuation`
+        - `Final_Punctuation`
+
+    Also see |advanced-quotes|
+
 == Box ==
     `[this is a box]`
     It has no syntatic meaning,
@@ -135,7 +144,7 @@ This way the user to format the text however they see fit
 
     Spaces may be used in dividers.
 
-    NOTE: there are characters that can be used on the ends of a divider:
+    *NOTE*: there are characters that can be used on the ends of a divider:
     - right side
         - `<`
         - `├`
@@ -147,7 +156,8 @@ This way the user to format the text however they see fit
     - both
         - `|`
 
-== Unordered bullets ==
+
+== Unordered bullets ==                                                 #lists#
 
     `- top level`
         `- next level (interally this is still top level
@@ -161,7 +171,7 @@ This way the user to format the text however they see fit
         `a. next level`
             `i. next level`
 
-    *NOTE:* The user is expected to number themselves
+    *NOTE*: The user is expected to number themselves
 
 
 == Tables ==
@@ -176,6 +186,18 @@ This way the user to format the text however they see fit
     if you want a table, use a markdown block,
     or dont since it really doesn't matter that much
 
+== Advanced Quotes ==                                         #advanced-quotes#
+
+    `‘the quote’ ~ author`
+    This may be spread out over multiple lines as such
+    >mmfml
+    ‘the quote’
+    ~ the author
+    <
+
+    `~`, `—`, `–`, and `-` may be used as author markers
+    *NOTE*: `-` only works on same line due to |lists|
+
 
 ================================= Code Stuff ==================================
 
@@ -188,7 +210,8 @@ This way the user to format the text however they see fit
     "markup in here is also ignored, it's an inline version of the code block"
     $$
 
-    (/ NOTE: the language is optional,
+    *NOTE*:
+        the language is optional,
         the user should set what the default language should be /) 
 
 

@@ -112,7 +112,6 @@ module.exports = grammar({
 
     code_block: $ => seq(
       alias($._code_block_start, $.code_block_start),
-      // alias(">", $.code_block_start_arrow),
       choice(
         field("language", alias(token.immediate(/[A-Za-z0-9]+\n/), $.language)),
         token.immediate(/\n/)
@@ -135,13 +134,29 @@ module.exports = grammar({
       token.immediate(seq(repeat(" "), "|"))
     ),
 
-    quote: $ => seq(alias(/[\p{Initial_Punctuation}「]/, $.quote_start), /[^\p{Final_Punctuation}」]+/, alias(/[`」\p{Final_Punctuation}]/, $.quote_end)),
+    quote: $ => prec.left(seq(
+      alias(/[\p{Initial_Punctuation}「]/, $.quote_start),
+      repeat1(/[^\p{Final_Punctuation}」]/),
+      alias(/[」\p{Final_Punctuation}]/, $.quote_end),
+      optional(seq(
+        alias(
+          token.immediate(
+            seq(
+              /[\s\n]*/,
+              choice("–", "—", "~", "-"),
+            )
+          ),
+          $.quote_author_indicator,
+        ),
+        alias(/[^\n]+/, $.quote_author)
+      )))
+    ),
 
     bold: $ => seq(alias("*", $.bold_start), $.simple_marked_text, alias("*", $.bold_end)),
     italic: $ => seq(alias("(/", $.italic_start), $.simple_marked_text, alias("/)", $.italic_end)),
     strikethrough: $ => seq(alias("~", $.strikethrough_start), $.simple_marked_text, alias("~", $.strikethrough_end)),
     underline: $ => seq(alias("_", $.underline_start), $.simple_marked_text, alias("_", $.underline_end)),
-    pre_sample: $ => seq(alias("`", $.pre_sample_start), /`+/, alias("`", $.pre_sample_end)),
+    pre_sample: $ => seq(alias("`", $.pre_sample_start), /[^`]+/, alias("`", $.pre_sample_end)),
     higlight: $ => seq(alias("+", $.higlight_start), $.simple_marked_text, alias("+", $.higlight_end)),
     anchor: $ => seq(alias("#", $.anchor_start), $.simple_marked_text, alias("#", $.anchor_end)),
 
@@ -153,9 +168,15 @@ module.exports = grammar({
           //highlight specific words as special if they want
           //basically it creates a node that is whitespace diliminated
           prec.right(
-            alias(
-              repeat1(/[^\s]/),
-              $.word
+            choice(
+              alias(
+                repeat1(/\p{Letter}/),
+                $.word
+              ),
+              alias(
+              repeat1(/\P{Letter}/),
+              $.non_word
+              )
             )
           )
         )
