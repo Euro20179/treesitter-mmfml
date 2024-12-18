@@ -103,9 +103,9 @@ This way the user to format the text however they see fit
 
 == Header ==
 
-    H1: = text =
-    H2: == text ==
-    H3: === text ===
+    H1: `=` text `=`
+    H2: `==` text `==`
+    H3: `===` text `===`
     .
     .
     .
@@ -127,7 +127,6 @@ This way the user to format the text however they see fit
     >
     ^[1]:
         The footnote goes here
-    [/1]
     <
 
     To link to a footnote do `^[1]`
