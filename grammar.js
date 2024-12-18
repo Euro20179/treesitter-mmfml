@@ -83,7 +83,7 @@ module.exports = grammar({
     footnote_name_text: $ => repeat1(/[A-Za-z0-9\*\+\-_]/),
     footnote_block: $ => seq(
       alias(seq(
-        "\n^[",
+        "^[",
         alias($.footnote_name_text, $.footnote_block_name),
         "]:",
         /\s+/,
