@@ -29,6 +29,12 @@ This way the user to format the text however they see fit
     Any character(s) *not* in the `letter` unicode category seperated by
     other markup
 
+== Paragraph separator ==
+    `\n\n`
+
+== Line break ==
+    `\n`
+
 == Esc ==
 
     Any special character can be escaped with `\`
@@ -117,6 +123,7 @@ This way the user to format the text however they see fit
 
 == Anchor ==
     An anchor can be any header OR, marked with `#anchor#`
+
 
 
 == Footnote ==
@@ -250,4 +257,5 @@ This way the user to format the text however they see fit
 ^[1]:
     I have given in slightly,
     there is now a paragraph separator node which is `\n\n`
+    and a line break node which is `\n`
     However this should also make writing queries easier so yeah
