@@ -138,7 +138,7 @@ module.exports = grammar({
     italic: $ => seq(alias("(/", $.italic_start), $.simple_marked_text, alias("/)", $.italic_end)),
     strikethrough: $ => seq(alias("~", $.strikethrough_start), $.simple_marked_text, alias("~", $.strikethrough_end)),
     underline: $ => seq(alias("_", $.underline_start), $.simple_marked_text, alias("_", $.underline_end)),
-    pre_sample: $ => seq(alias("`", $.pre_sample_start), /[^`\n]+/, alias("`", $.pre_sample_end)),
+    pre_sample: $ => seq(alias(/[\p{Initial_Punctuation}`]/, $.pre_sample_start), /[^`\p{Final_Punctuation}\n]+/, alias(/[`\p{Final_Punctuation}]/, $.pre_sample_end)),
     higlight: $ => seq(alias("+", $.higlight_start), $.simple_marked_text, alias("+", $.higlight_end)),
     anchor: $ => seq(alias("#", $.anchor_start), $.simple_marked_text, alias("#", $.anchor_end)),
 
