@@ -15,7 +15,6 @@ module.exports = grammar({
         prec(10, $.code_block),
         $.list,
         prec(1, $.simple_marked_text),
-        $.metadata_tag
       ))
     ),
 
@@ -42,18 +41,6 @@ module.exports = grammar({
       alias(repeat1(/[^\$\n]/), $.code),
       alias("$$", $.inline_code_end)
     ),
-
-    metadata_tag: $ => prec.left(seq(
-      ">metadata\n",
-      repeat1(
-        seq(
-          seq(alias($.plain, $.metadata_key), ":"),
-          alias($.plain, $.metadata_value),
-          "\n",
-        )
-      ),
-      "<\n"
-    )),
 
     header: $ => $._header,
 
