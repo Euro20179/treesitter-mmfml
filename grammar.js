@@ -33,7 +33,8 @@ module.exports = grammar({
       $.plain,
       $.esc,
       $.inline_code,
-      $.quote
+      $.quote,
+      $.paragraph_separation,
     ))),
 
     inline_code: $ => seq(
@@ -146,9 +147,11 @@ module.exports = grammar({
     italic: $ => seq(alias("(/", $.italic_start), $.simple_marked_text, alias("/)", $.italic_end)),
     strikethrough: $ => seq(alias("~", $.strikethrough_start), $.simple_marked_text, alias("~", $.strikethrough_end)),
     underline: $ => seq(alias("_", $.underline_start), $.simple_marked_text, alias("_", $.underline_end)),
-    pre_sample: $ => seq(alias("`", $.pre_sample_start), /[^`]+/, alias("`", $.pre_sample_end)),
+    pre_sample: $ => seq(alias("`", $.pre_sample_start), alias(/[^`]+/, $.pre_sample_text), alias("`", $.pre_sample_end)),
     higlight: $ => seq(alias("+", $.higlight_start), $.simple_marked_text, alias("+", $.higlight_end)),
     anchor: $ => seq(alias("#", $.anchor_start), $.simple_marked_text, alias("#", $.anchor_end)),
+
+    paragraph_separation: $ => "\n\n",
 
     plain: $ => prec.right(
       repeat1(

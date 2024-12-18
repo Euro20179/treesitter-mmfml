@@ -6,7 +6,7 @@ And to be a combination of various markup things that i like from various
 markup languages
 
 This text is only structured so that a treesitter parser can parse it
-It is not meant to be converted to html or something viewed
+It is not meant to be converted to html or something viewed ^[1]
 It is a markup format *made* to be displayed inside neovim
 
 |───────────────────────────────── The Spec ──────────────────────────────────|
@@ -247,3 +247,10 @@ This way the user to format the text however they see fit
     as long as there is the same number of `<` at the end.
 
     This allows for nesting.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+^[1]:
+    I have given in slightly,
+    there is now a paragraph separator node which is `\n\n`
+    However this should also make writing queries easier so yeah
