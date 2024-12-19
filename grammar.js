@@ -124,20 +124,13 @@ module.exports = grammar({
     ),
 
     footnote_name_text: $ => repeat1(/[A-Za-z0-9\*\+\-_]/),
-    footnote_block: $ => seq(
-      alias(seq(
-        "^[",
+    footnote_block: $ => 
+      seq(
+        alias("^[", $.footnote_start),
         alias($.footnote_name_text, $.footnote_block_name),
-        "]:",
+        alias("]:", $.footnote_end),
         /\s+/,
-      ), $.footnote_start),
-      // repeat1($.simple_marked_text),
-      // seq(
-      //   alias("\n[/", $.footnote_end),
-      //   $.footnote_name_text,
-      //   alias("]", $.footnote_end)
-      // )
-    ),
+      ),
 
     esc: $ => seq(
       alias("\\", $.backslash),
