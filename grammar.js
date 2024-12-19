@@ -36,6 +36,7 @@ module.exports = grammar({
       $.esc,
       $.inline_code,
       $.quote,
+      $.space,
     ))),
 
     inline_code: $ => seq(
@@ -190,6 +191,7 @@ module.exports = grammar({
     paragraph_separation: $ => "\n\n",
     line_break: $ => "\n",
 
+    space: $ => prec.right(repeat1(/[\p{Space_Separator}]/)),
 
     plain: $ => prec.right(
       repeat1(
