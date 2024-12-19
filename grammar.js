@@ -163,7 +163,7 @@ module.exports = grammar({
 
     quote: $ => prec.left(seq(
       alias(/[\p{Initial_Punctuation}「]/, $.quote_start),
-      repeat1(/[^\p{Final_Punctuation}」]/),
+      alias(repeat1(/[^\p{Final_Punctuation}」]/), $.quote_text),
       alias(/[」\p{Final_Punctuation}]/, $.quote_end),
       optional(seq(
         alias(

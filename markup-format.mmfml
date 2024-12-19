@@ -81,6 +81,7 @@ This way the user to format the text however they see fit
 
 == Box ==
     `[this is a box]`
+
     It has no syntatic meaning,
     and is only given meaning by a highligher or renderer if it wants to.
 
