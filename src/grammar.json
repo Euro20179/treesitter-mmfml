@@ -660,33 +660,10 @@
     },
     "esc": {
       "type": "PREC",
-      "value": 1,
+      "value": 10,
       "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "STRING",
-              "value": "\\"
-            },
-            "named": true,
-            "value": "backslash"
-          },
-          {
-            "type": "FIELD",
-            "name": "char",
-            "content": {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "non_word"
-              },
-              "named": true,
-              "value": "escaped_char"
-            }
-          }
-        ]
+        "type": "PATTERN",
+        "value": "\\\\[^\\n\\p{Letter}]"
       }
     },
     "code_block": {
@@ -982,49 +959,61 @@
       ]
     },
     "italic": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "(/"
-              },
-              {
-                "type": "STRING",
-                "value": "\\"
-              }
-            ]
+      "type": "PREC",
+      "value": 10,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "(/"
+                },
+                {
+                  "type": "STRING",
+                  "value": "/*"
+                },
+                {
+                  "type": "STRING",
+                  "value": "^"
+                }
+              ]
+            },
+            "named": true,
+            "value": "italic_start"
           },
-          "named": true,
-          "value": "italic_start"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "simple_marked_text"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "/)"
-              },
-              {
-                "type": "STRING",
-                "value": "\\"
-              }
-            ]
+          {
+            "type": "SYMBOL",
+            "name": "simple_marked_text"
           },
-          "named": true,
-          "value": "italic_end"
-        }
-      ]
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "/)"
+                },
+                {
+                  "type": "STRING",
+                  "value": "*/"
+                },
+                {
+                  "type": "STRING",
+                  "value": "^"
+                }
+              ]
+            },
+            "named": true,
+            "value": "italic_end"
+          }
+        ]
+      }
     },
     "strikethrough": {
       "type": "SEQ",

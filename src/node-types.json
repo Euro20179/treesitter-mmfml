@@ -107,32 +107,6 @@
   {
     "type": "esc",
     "named": true,
-    "fields": {
-      "char": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "escaped_char",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "backslash",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "escaped_char",
-    "named": true,
     "fields": {}
   },
   {
@@ -572,10 +546,6 @@
   },
   {
     "type": "anchor_start",
-    "named": true
-  },
-  {
-    "type": "backslash",
     "named": true
   },
   {

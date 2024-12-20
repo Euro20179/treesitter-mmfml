@@ -49,7 +49,12 @@ This way the user to format the text however they see fit
 
     `(/text/)`
     or
-    `\text\` (the following character must be in the unicode `Letter` category)
+    `/*text*/`
+    or
+    `^text^`
+    There's so many italics because idk which i like between `/*` and `(/`
+    Also both `/*` and `(/` look like "optional text", so i wanted a third
+    option that didn't look like "optional text"
 
 == Underline ==
 
