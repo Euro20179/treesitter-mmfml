@@ -133,10 +133,10 @@ module.exports = grammar({
         /\s+/,
       ),
 
-    esc: $ => seq(
+    esc: $ => prec(1, seq(
       alias("\\", $.backslash),
-      field("char", alias(/./, $.escaped_char))
-    ),
+      field("char", alias($.non_word, $.escaped_char))
+    )),
 
     code_block: $ => seq(
       alias($._code_block_start, $.code_block_start),
@@ -181,7 +181,7 @@ module.exports = grammar({
     ),
 
     bold: $ => seq(alias("*", $.bold_start), $.simple_marked_text, alias("*", $.bold_end)),
-    italic: $ => seq(alias("(/", $.italic_start), $.simple_marked_text, alias("/)", $.italic_end)),
+    italic: $ => seq(alias(choice("(/", "\\"), $.italic_start), $.simple_marked_text, alias(choice("/)", "\\"), $.italic_end)),
     strikethrough: $ => seq(alias("~", $.strikethrough_start), $.simple_marked_text, alias("~", $.strikethrough_end)),
     underline: $ => seq(alias("_", $.underline_start), $.simple_marked_text, alias("_", $.underline_end)),
     pre_sample: $ => seq(alias("`", $.pre_sample_start), alias(/[^`]+/, $.pre_sample_text), alias("`", $.pre_sample_end)),
@@ -192,6 +192,8 @@ module.exports = grammar({
     line_break: $ => "\n",
 
     space: $ => prec.right(repeat1(/[\p{Space_Separator}]/)),
+
+    non_word: $ => prec.right(repeat1(/\P{Letter}/)),
 
     plain: $ => prec.right(
       repeat1(
@@ -206,10 +208,7 @@ module.exports = grammar({
                 repeat1(/\p{Letter}/),
                 $.word
               ),
-              alias(
-                repeat1(/\P{Letter}/),
-                $.non_word
-              )
+              $.non_word
             )
           )
         )

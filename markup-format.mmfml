@@ -38,6 +38,8 @@ This way the user to format the text however they see fit
 == Esc ==
 
     Any special character can be escaped with `\`
+    The character following `\` MUST be outside the unicod `Letter` category
+    Otherwise it will be treated as |Italic|
 
 == Bold ==
 
@@ -46,6 +48,8 @@ This way the user to format the text however they see fit
 == Italic ==
 
     `(/text/)`
+    or
+    `\text\`
 
 == Underline ==
 

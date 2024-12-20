@@ -131,6 +131,11 @@
     }
   },
   {
+    "type": "escaped_char",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "footnote_block",
     "named": true,
     "fields": {},
@@ -591,10 +596,6 @@
   },
   {
     "type": "divider",
-    "named": true
-  },
-  {
-    "type": "escaped_char",
     "named": true
   },
   {
