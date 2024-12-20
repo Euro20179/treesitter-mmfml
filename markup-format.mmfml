@@ -57,7 +57,7 @@ This way the user to format the text however they see fit
 
 == Strikethrough ==
 
-    `~text~` or `-text-`
+    `~text~`
 
 == Highlight/marks ==
 
