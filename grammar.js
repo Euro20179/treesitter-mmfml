@@ -190,9 +190,9 @@ module.exports = grammar({
       alias("*", $.bold_end)
     ),
     italic: $ => prec(10, seq(
-      alias(choice("(/", "/*", "^", " /"), $.italic_start),
+      alias(choice("(/", "/*", " /"), $.italic_start),
       $.simple_marked_text,
-      alias(choice("/)", "*/", "^", "/ "), $.italic_end),
+      alias(choice("/)", "*/", "/ "), $.italic_end),
     )),
     strikethrough: $ => seq(
       alias("~", $.strikethrough_start),

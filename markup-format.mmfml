@@ -51,8 +51,6 @@ This way the user to format the text however they see fit
     or
     `/*text*/`
     or
-    `^text^`
-    or
     `/text/` (/there must be a leading and following space/)
     There's so many italics because idk which i like between `/*` and `(/`
     Also both `/*` and `(/` look like "optional text", so i wanted a third
