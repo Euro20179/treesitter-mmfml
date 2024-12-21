@@ -37,6 +37,7 @@ module.exports = grammar({
       $.inline_code,
       $.quote,
       $.space,
+      $.hidden,
     ))),
 
     inline_code: $ => seq(
@@ -177,15 +178,21 @@ module.exports = grammar({
       )))
     ),
 
+    hidden: $ => seq(
+      alias("||", $.hidden_start),
+      $.simple_marked_text,
+      alias("||", $.hidden_end)
+    ),
+
     bold: $ => seq(
       alias("*", $.bold_start),
       $.simple_marked_text,
       alias("*", $.bold_end)
     ),
     italic: $ => prec(10, seq(
-      alias(choice("(/", "/*", "^"), $.italic_start),
+      alias(choice("(/", "/*", "^", " /"), $.italic_start),
       $.simple_marked_text,
-      alias(choice("/)", "*/", "^"), $.italic_end),
+      alias(choice("/)", "*/", "^", "/ "), $.italic_end),
     )),
     strikethrough: $ => seq(
       alias("~", $.strikethrough_start),

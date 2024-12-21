@@ -171,6 +171,29 @@
     "fields": {}
   },
   {
+    "type": "hidden",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "hidden_end",
+          "named": true
+        },
+        {
+          "type": "hidden_start",
+          "named": true
+        },
+        {
+          "type": "simple_marked_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "higlight",
     "named": true,
     "fields": {},
@@ -375,6 +398,10 @@
           "named": true
         },
         {
+          "type": "hidden",
+          "named": true
+        },
+        {
           "type": "higlight",
           "named": true
         },
@@ -574,6 +601,14 @@
   },
   {
     "type": "footnote_start",
+    "named": true
+  },
+  {
+    "type": "hidden_end",
+    "named": true
+  },
+  {
+    "type": "hidden_start",
     "named": true
   },
   {
