@@ -36,7 +36,6 @@ module.exports = grammar({
       $.esc,
       $.inline_code,
       $.quote,
-      $.space,
       $.hidden,
     ))),
 
@@ -240,7 +239,8 @@ module.exports = grammar({
                 repeat1(/\p{Letter}/),
                 $.word
               ),
-              $.non_word
+              $.non_word,
+              $.space,
             )
           )
         )
