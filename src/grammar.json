@@ -206,8 +206,17 @@
       ]
     },
     "header": {
-      "type": "SYMBOL",
-      "name": "_header"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_header"
+        },
+        {
+          "type": "PATTERN",
+          "value": ".+~\\n"
+        }
+      ]
     },
     "sof_header": {
       "type": "ALIAS",
@@ -1006,14 +1015,6 @@
                 },
                 {
                   "type": "STRING",
-                  "value": "/*"
-                },
-                {
-                  "type": "STRING",
-                  "value": "^"
-                },
-                {
-                  "type": "STRING",
                   "value": " /"
                 }
               ]
@@ -1033,14 +1034,6 @@
                 {
                   "type": "STRING",
                   "value": "/)"
-                },
-                {
-                  "type": "STRING",
-                  "value": "*/"
-                },
-                {
-                  "type": "STRING",
-                  "value": "^"
                 },
                 {
                   "type": "STRING",
