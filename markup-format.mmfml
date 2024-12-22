@@ -134,8 +134,6 @@ This way the user to format the text however they see fit
     - there can be as many `=` as you want.
         - this conflicts with the `=` |Dividers|, but i think it's fine
 
-    - vimdoc headings such as `Heading ~` are also allowed
-
 
 == Anchor ==
     An anchor can be any header OR, marked with `#anchor#`

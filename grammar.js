@@ -46,10 +46,7 @@ module.exports = grammar({
       alias("$$", $.inline_code_end)
     ),
 
-    header: $ => choice(
-      $._header,
-      /.+~\n/,
-    ),
+    header: $ => $._header,
 
     sof_header: $ => alias($._sof_header, $.header),
 
@@ -193,9 +190,6 @@ module.exports = grammar({
       alias("*", $.bold_end)
     ),
     italic: $ => prec(10, seq(
-      //FIXME: `/*` and `/` conflict
-      //also: should probably make italic_{start,end} external parsers
-      //that way i can force them to match
       alias(choice("(/", "/*", " /"), $.italic_start),
       $.simple_marked_text,
       alias(choice("/)", "*/", "/ "), $.italic_end),
