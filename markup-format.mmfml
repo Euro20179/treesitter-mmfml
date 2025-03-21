@@ -248,7 +248,7 @@ This way the user to format the text however they see fit
         the user should set what the default language should be
 
     *NOTE*:
-        renderers that can render rich text, should render any markup languages here as rich text
+        A renderer that can render rich text may render markup languages as rich text
 
     The point of this is that it can be $text$ inline $$,
     unlike |Code block|
@@ -263,6 +263,10 @@ This way the user to format the text however they see fit
     >python
     print("Hello")
     <
+
+    *NOTE*:
+        A renderer MUST render text here as close to the original text as possible.
+        Syntax highlighting and other niceties may be applied
 
     As many `>` can be used at the start as you like,
     as long as there is the same number of `<` at the end.
