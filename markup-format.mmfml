@@ -247,6 +247,9 @@ This way the user to format the text however they see fit
         the language is optional,
         the user should set what the default language should be
 
+    *NOTE*:
+        renderers that can render rich text, should render any markup languages here as rich text
+
     The point of this is that it can be $text$ inline $$,
     unlike |Code block|
 

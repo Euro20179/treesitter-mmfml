@@ -300,6 +300,10 @@
           "named": true
         },
         {
+          "type": "space",
+          "named": true
+        },
+        {
           "type": "word",
           "named": true
         }
@@ -427,10 +431,6 @@
         },
         {
           "type": "quote",
-          "named": true
-        },
-        {
-          "type": "space",
           "named": true
         },
         {

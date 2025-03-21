@@ -133,10 +133,6 @@
             },
             {
               "type": "SYMBOL",
-              "name": "space"
-            },
-            {
-              "type": "SYMBOL",
               "name": "hidden"
             }
           ]
@@ -1010,10 +1006,6 @@
                 },
                 {
                   "type": "STRING",
-                  "value": "^"
-                },
-                {
-                  "type": "STRING",
                   "value": " /"
                 }
               ]
@@ -1037,10 +1029,6 @@
                 {
                   "type": "STRING",
                   "value": "*/"
-                },
-                {
-                  "type": "STRING",
-                  "value": "^"
                 },
                 {
                   "type": "STRING",
@@ -1257,6 +1245,10 @@
                   {
                     "type": "SYMBOL",
                     "name": "non_word"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "space"
                   }
                 ]
               }
