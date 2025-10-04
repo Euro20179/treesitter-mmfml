@@ -18,47 +18,51 @@
           ]
         },
         {
-          "type": "REPEAT1",
+          "type": "PREC_LEFT",
+          "value": 0,
           "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "header"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "footnote_block"
-              },
-              {
-                "type": "PREC",
-                "value": 10,
-                "content": {
+            "type": "REPEAT1",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
                   "type": "SYMBOL",
-                  "name": "code_block"
-                }
-              },
-              {
-                "type": "SYMBOL",
-                "name": "list"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "paragraph_separation"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "line_break"
-              },
-              {
-                "type": "PREC",
-                "value": 1,
-                "content": {
+                  "name": "header"
+                },
+                {
                   "type": "SYMBOL",
-                  "name": "simple_marked_text"
+                  "name": "footnote_block"
+                },
+                {
+                  "type": "PREC",
+                  "value": 10,
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "code_block"
+                  }
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "list"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "paragraph_separation"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "line_break"
+                },
+                {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "simple_marked_text"
+                  }
                 }
-              }
-            ]
+              ]
+            }
           }
         }
       ]
@@ -71,6 +75,10 @@
         "content": {
           "type": "CHOICE",
           "members": [
+            {
+              "type": "SYMBOL",
+              "name": "comment"
+            },
             {
               "type": "SYMBOL",
               "name": "divider"
@@ -986,58 +994,109 @@
       ]
     },
     "italic": {
-      "type": "PREC",
-      "value": 10,
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "(/"
+              },
+              {
+                "type": "STRING",
+                "value": " /"
+              }
+            ]
+          },
+          "named": true,
+          "value": "italic_start"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "simple_marked_text"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "/)"
+              },
+              {
+                "type": "STRING",
+                "value": "/ "
+              }
+            ]
+          },
+          "named": true,
+          "value": "italic_end"
+        }
+      ]
+    },
+    "comment": {
+      "type": "PREC_RIGHT",
+      "value": 0,
       "content": {
         "type": "SEQ",
         "members": [
           {
             "type": "ALIAS",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": "(/"
-                },
-                {
-                  "type": "STRING",
-                  "value": "/*"
-                },
-                {
-                  "type": "STRING",
-                  "value": " /"
-                }
-              ]
+              "type": "PATTERN",
+              "value": "###+"
             },
             "named": true,
-            "value": "italic_start"
+            "value": "comment_start"
           },
           {
-            "type": "SYMBOL",
-            "name": "simple_marked_text"
+            "type": "REPEAT1",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "#"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "source_file"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "#"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              ]
+            }
           },
           {
             "type": "ALIAS",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": "/)"
-                },
-                {
-                  "type": "STRING",
-                  "value": "*/"
-                },
-                {
-                  "type": "STRING",
-                  "value": "/ "
-                }
-              ]
+              "type": "PATTERN",
+              "value": "###+"
             },
             "named": true,
-            "value": "italic_end"
+            "value": "comment_end"
           }
         ]
       }
@@ -1285,5 +1344,6 @@
     }
   ],
   "inline": [],
-  "supertypes": []
+  "supertypes": [],
+  "reserved": {}
 }

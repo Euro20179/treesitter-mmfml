@@ -56,6 +56,17 @@ This way the user to format the text however they see fit
     Also both `/*` and `(/` look like "optional text", so i wanted a third
     option that didn't look like "optional text"
 
+== Comment ==
+    `###########
+     # comment #
+     ###########
+    `
+    Formed with a starting `###` and an ending `###`
+    Simplest comment:
+    `### hi ###`
+
+    All markup is valid within a comment (except anchors)
+
 == Underline ==
 
     `_text_`

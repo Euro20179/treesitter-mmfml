@@ -9,7 +9,7 @@ module.exports = grammar({
   rules: {
     source_file: $ => seq(
       optional($.sof_header),
-      repeat1(choice(
+      prec.left(repeat1(choice(
         $.header,
         $.footnote_block,
         prec(10, $.code_block),
@@ -17,10 +17,11 @@ module.exports = grammar({
         $.paragraph_separation,
         $.line_break,
         prec(1, $.simple_marked_text),
-      ))
+      )))
     ),
 
     simple_marked_text: $ => prec.left(repeat1(choice(
+      $.comment,
       $.divider,
       $.bold,
       $.italic,
@@ -188,11 +189,15 @@ module.exports = grammar({
       $.simple_marked_text,
       alias("*", $.bold_end)
     ),
-    italic: $ => prec(10, seq(
-      alias(choice("(/", "/*", " /"), $.italic_start),
+
+    italic: $ => seq(
+      alias(choice("(/", " /"), $.italic_start),
       $.simple_marked_text,
-      alias(choice("/)", "*/", "/ "), $.italic_end),
-    )),
+      alias(choice("/)", "/ "), $.italic_end),
+    ),
+
+    comment: $ => prec.right(seq(alias(/###+/, $.comment_start), repeat1(seq(optional("#"), $.source_file, optional("#"))), alias(/###+/, $.comment_end))),
+
     strikethrough: $ => seq(
       alias("~", $.strikethrough_start),
       $.simple_marked_text,
