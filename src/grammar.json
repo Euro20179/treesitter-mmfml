@@ -18,51 +18,47 @@
           ]
         },
         {
-          "type": "PREC_LEFT",
-          "value": 0,
+          "type": "REPEAT1",
           "content": {
-            "type": "REPEAT1",
-            "content": {
-              "type": "CHOICE",
-              "members": [
-                {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "header"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "footnote_block"
+              },
+              {
+                "type": "PREC",
+                "value": 10,
+                "content": {
                   "type": "SYMBOL",
-                  "name": "header"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "footnote_block"
-                },
-                {
-                  "type": "PREC",
-                  "value": 10,
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "code_block"
-                  }
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "list"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "paragraph_separation"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "line_break"
-                },
-                {
-                  "type": "PREC",
-                  "value": 1,
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "simple_marked_text"
-                  }
+                  "name": "code_block"
                 }
-              ]
-            }
+              },
+              {
+                "type": "SYMBOL",
+                "name": "list"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "paragraph_separation"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "line_break"
+              },
+              {
+                "type": "PREC",
+                "value": 1,
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "simple_marked_text"
+                }
+              }
+            ]
           }
         }
       ]
@@ -75,10 +71,6 @@
         "content": {
           "type": "CHOICE",
           "members": [
-            {
-              "type": "SYMBOL",
-              "name": "comment"
-            },
             {
               "type": "SYMBOL",
               "name": "divider"
@@ -994,109 +986,58 @@
       ]
     },
     "italic": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "(/"
-              },
-              {
-                "type": "STRING",
-                "value": " /"
-              }
-            ]
-          },
-          "named": true,
-          "value": "italic_start"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "simple_marked_text"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "/)"
-              },
-              {
-                "type": "STRING",
-                "value": "/ "
-              }
-            ]
-          },
-          "named": true,
-          "value": "italic_end"
-        }
-      ]
-    },
-    "comment": {
-      "type": "PREC_RIGHT",
-      "value": 0,
+      "type": "PREC",
+      "value": 10,
       "content": {
         "type": "SEQ",
         "members": [
           {
             "type": "ALIAS",
             "content": {
-              "type": "PATTERN",
-              "value": "###+"
-            },
-            "named": true,
-            "value": "comment_start"
-          },
-          {
-            "type": "REPEAT1",
-            "content": {
-              "type": "SEQ",
+              "type": "CHOICE",
               "members": [
                 {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "STRING",
-                      "value": "#"
-                    },
-                    {
-                      "type": "BLANK"
-                    }
-                  ]
+                  "type": "STRING",
+                  "value": "(/"
                 },
                 {
-                  "type": "SYMBOL",
-                  "name": "source_file"
+                  "type": "STRING",
+                  "value": "/*"
                 },
                 {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "STRING",
-                      "value": "#"
-                    },
-                    {
-                      "type": "BLANK"
-                    }
-                  ]
+                  "type": "STRING",
+                  "value": " /"
                 }
               ]
-            }
+            },
+            "named": true,
+            "value": "italic_start"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "simple_marked_text"
           },
           {
             "type": "ALIAS",
             "content": {
-              "type": "PATTERN",
-              "value": "###+"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "/)"
+                },
+                {
+                  "type": "STRING",
+                  "value": "*/"
+                },
+                {
+                  "type": "STRING",
+                  "value": "/ "
+                }
+              ]
             },
             "named": true,
-            "value": "comment_end"
+            "value": "italic_end"
           }
         ]
       }
@@ -1344,6 +1285,5 @@
     }
   ],
   "inline": [],
-  "supertypes": [],
-  "reserved": {}
+  "supertypes": []
 }
