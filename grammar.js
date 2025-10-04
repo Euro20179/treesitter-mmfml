@@ -72,6 +72,9 @@ module.exports = grammar({
         optional(choice("<", "|", "├", "┣")),
         choice(
           repeat1(
+            seq("##", repeat1("#"))
+          ),
+          repeat1(
             seq("==", repeat1("="))
           ),
           repeat1(
