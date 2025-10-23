@@ -49,22 +49,22 @@ module.exports = grammar({
 
     sof_header: $ => alias($._sof_header, $.header),
 
-    list: $ => token.immediate(
-      seq(
-        "\n",
-        repeat(/\s/),
-        choice(
-          choice("-", "•", "*", "+"),
-          seq(
-            choice(
-              repeat1(/\p{Number}/),
-              /\p{Letter}/,
+    list: $ => seq(
+      token.immediate(
+        seq(
+          choice(
+            choice("-", "•", "*", "+"),
+            seq(
+              choice(
+                repeat1(/\p{Number}/),
+                /\p{Letter}/,
+              ),
+              choice(".", "\x29") //29 is close paren
             ),
-            choice(".", "\x29") //29 is close paren
           ),
+        /\s/
         ),
-        /\s/,
-      )
+      ),
     ),
 
     divider: $ => token.immediate(

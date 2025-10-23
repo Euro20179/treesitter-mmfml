@@ -283,6 +283,11 @@
     "fields": {}
   },
   {
+    "type": "list",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "non_word",
     "named": true,
     "fields": {}
@@ -641,10 +646,6 @@
   },
   {
     "type": "line_break",
-    "named": true
-  },
-  {
-    "type": "list",
     "named": true
   },
   {
