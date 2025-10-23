@@ -30,6 +30,8 @@ As a side note, this format pretty heavily relies on monospace font, so uh yeah
 
 But the user can just set their font if it's not monospace :)
 
+[Do this with markdown] | ./example.png |
+
 ===============================================================================
 
                                    = Building
