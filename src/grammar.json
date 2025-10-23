@@ -44,10 +44,6 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "paragraph_separation"
-              },
-              {
-                "type": "SYMBOL",
                 "name": "line_break"
               },
               {
@@ -1200,10 +1196,6 @@
           "value": "anchor_end"
         }
       ]
-    },
-    "paragraph_separation": {
-      "type": "STRING",
-      "value": "\n\n"
     },
     "line_break": {
       "type": "STRING",

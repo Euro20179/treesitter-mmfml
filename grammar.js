@@ -14,7 +14,6 @@ module.exports = grammar({
         $.footnote_block,
         prec(10, $.code_block),
         $.list,
-        $.paragraph_separation,
         $.line_break,
         prec(1, $.simple_marked_text),
       ))
@@ -222,7 +221,6 @@ module.exports = grammar({
       alias("#", $.anchor_end)
     ),
 
-    paragraph_separation: $ => "\n\n",
     line_break: $ => "\n",
 
     space: $ => prec.right(repeat1(/[\p{Space_Separator}]/)),

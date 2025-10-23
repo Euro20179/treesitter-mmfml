@@ -489,10 +489,6 @@
           "named": true
         },
         {
-          "type": "paragraph_separation",
-          "named": true
-        },
-        {
           "type": "simple_marked_text",
           "named": true
         },
@@ -645,10 +641,6 @@
   },
   {
     "type": "list",
-    "named": true
-  },
-  {
-    "type": "paragraph_separation",
     "named": true
   },
   {
