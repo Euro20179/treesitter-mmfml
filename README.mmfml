@@ -24,13 +24,13 @@ I want this format to be readable when there's no renderer.
 This is also why I'm using this language for the readme file.
 It should look fine even though github won't have a renderer for it
 
+[Do this with markdown] | ./example.png |
+
 == The flaw with mmfml
 
 As a side note, this format pretty heavily relies on monospace font, so uh yeah
 
 But the user can just set their font if it's not monospace :)
-
-[Do this with markdown] | ./example.png |
 
 ===============================================================================
 
