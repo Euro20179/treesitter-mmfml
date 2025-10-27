@@ -36,6 +36,7 @@ module.exports = grammar({
       $.inline_code,
       $.quote,
       $.hidden,
+      $.label
     ))),
 
     inline_code: $ => seq(
@@ -127,7 +128,7 @@ module.exports = grammar({
     ),
 
     footnote_name_text: $ => repeat1(/[A-Za-z0-9\*\+\-_]/),
-    footnote_block: $ => 
+    footnote_block: $ =>
       seq(
         alias("^[", $.footnote_start),
         alias($.footnote_name_text, $.footnote_block_name),
@@ -190,11 +191,32 @@ module.exports = grammar({
       $.simple_marked_text,
       alias("*", $.bold_end)
     ),
-    italic: $ => prec(10, seq(
-      alias(choice("(/", "/*", " /"), $.italic_start),
-      $.simple_marked_text,
-      alias(choice("/)", "*/", "/ "), $.italic_end),
-    )),
+
+    label: $ => seq(
+      alias("<", $.label_start),
+      $.plain,
+      alias(">", $.label_end)
+    ),
+
+    italic: $ => prec(10,
+      choice(
+        seq(
+          alias("(/", $.italic_start),
+          $.simple_marked_text,
+          alias("/)", $.italic_end)
+        ),
+        seq(
+          alias("/*", $.italic_start),
+          $.simple_marked_text,
+          alias("*/", $.italic_end),
+        ),
+        seq(
+          alias(" /", $.italic_start),
+          $.simple_marked_text,
+          alias("/ ", $.italic_end),
+        )
+      )
+    ),
     strikethrough: $ => seq(
       alias("~", $.strikethrough_start),
       $.simple_marked_text,
