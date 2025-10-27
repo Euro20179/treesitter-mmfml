@@ -3,6 +3,9 @@ const basic_space = /[\p{Space_Separator}]/
 
 module.exports = grammar({
   name: "mmfml",
+
+  extras: $ => [basic_space, /\s/, /\n/],
+
   externals: $ => [
     $._code_block_start,
     $._code_block_end,
@@ -118,14 +121,6 @@ module.exports = grammar({
             seq("~~", repeat1("~"))
           )
         ),
-        // repeat1(
-        //   seq(
-        //     /[=\-+_:—–‗‾━─~]/,
-        //     /[=\-+_:—–‗‾━─~]/,
-        //     repeat1(/[=\-+_:—–‗‾━─~]/)
-        //     // repeat1(/[=\-\+_:]+/),
-        //   )
-        // ),
         optional(choice(">", "|", "┤", "┫"))
       )
     ),
@@ -201,7 +196,7 @@ module.exports = grammar({
       alias(">", $.label_end)
     ),
 
-    italic: $ =>
+    italic: $ => prec(10,
       choice(
         seq(
           alias("(/", $.italic_start),
@@ -219,6 +214,7 @@ module.exports = grammar({
           alias("/ ", $.italic_end),
         )
       ),
+    ),
     strikethrough: $ => seq(
       alias("~", $.strikethrough_start),
       $.simple_marked_text,
@@ -247,8 +243,6 @@ module.exports = grammar({
 
     line_break: $ => "\n",
 
-    space: $ => prec.right(repeat1(basic_space)),
-
     non_word: $ => prec.right(repeat1(/\P{Letter}/)),
 
     plain: $ => prec.right(
@@ -265,7 +259,6 @@ module.exports = grammar({
                 $.word
               ),
               $.non_word,
-              $.space,
             )
           )
         )
