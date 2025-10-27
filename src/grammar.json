@@ -779,8 +779,16 @@
           "value": "["
         },
         {
-          "type": "SYMBOL",
-          "name": "simple_marked_text"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "simple_marked_text"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "STRING",

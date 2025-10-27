@@ -154,7 +154,7 @@ module.exports = grammar({
       alias("]", $.footnote_end)
     ),
 
-    box: $ => seq("[", $.simple_marked_text, "]"),
+    box: $ => seq("[", optional($.simple_marked_text), "]"),
 
     link: $ => seq(
       //spaces prevent the spaces from being counted as the link url
