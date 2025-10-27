@@ -895,61 +895,51 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "ALIAS",
-                    "content": {
-                      "type": "IMMEDIATE_TOKEN",
-                      "content": {
-                        "type": "SEQ",
-                        "members": [
-                          {
-                            "type": "PATTERN",
-                            "value": "[\\s\\n]*"
-                          },
-                          {
-                            "type": "CHOICE",
-                            "members": [
-                              {
-                                "type": "STRING",
-                                "value": "–"
-                              },
-                              {
-                                "type": "STRING",
-                                "value": "—"
-                              },
-                              {
-                                "type": "STRING",
-                                "value": "~"
-                              },
-                              {
-                                "type": "STRING",
-                                "value": "-"
-                              }
-                            ]
-                          }
-                        ]
-                      }
-                    },
-                    "named": true,
-                    "value": "quote_author_indicator"
-                  },
-                  {
-                    "type": "ALIAS",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "[^\\n]+"
-                    },
-                    "named": true,
-                    "value": "quote_author"
-                  }
-                ]
+                "type": "REPEAT",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "\\n"
+                }
               },
               {
                 "type": "BLANK"
               }
             ]
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "–"
+                },
+                {
+                  "type": "STRING",
+                  "value": "—"
+                },
+                {
+                  "type": "STRING",
+                  "value": "~"
+                },
+                {
+                  "type": "STRING",
+                  "value": "-"
+                }
+              ]
+            },
+            "named": true,
+            "value": "quote_author_indicator"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "PATTERN",
+              "value": "[^\\n]+"
+            },
+            "named": true,
+            "value": "quote_author"
           }
         ]
       }
@@ -1102,7 +1092,7 @@
                 "type": "ALIAS",
                 "content": {
                   "type": "STRING",
-                  "value": ":"
+                  "value": " /"
                 },
                 "named": true,
                 "value": "italic_start"
@@ -1115,7 +1105,7 @@
                 "type": "ALIAS",
                 "content": {
                   "type": "STRING",
-                  "value": ":"
+                  "value": "/ "
                 },
                 "named": true,
                 "value": "italic_end"

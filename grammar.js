@@ -160,22 +160,20 @@ module.exports = grammar({
       seq(repeat(basic_space), "|")
     ),
 
-    quote: $ => prec.left(seq(
-      alias(choice(/[\p{Initial_Punctuation}「"]/, "``"), $.quote_start),
-      alias(repeat1(/[^\p{Final_Punctuation}」"]/), $.quote_text),
-      alias(choice(/[」"\p{Final_Punctuation}]/), $.quote_end),
-      optional(seq(
+    quote: $ => prec.left(
+      seq(
+        alias(choice(/[\p{Initial_Punctuation}「"]/, "``"), $.quote_start),
+        alias(repeat1(/[^\p{Final_Punctuation}」"]/), $.quote_text),
+        alias(choice(/[」"\p{Final_Punctuation}]/), $.quote_end),
+        optional(
+          repeat(/\n/),
+        ),
         alias(
-          token.immediate(
-            seq(
-              /[\s\n]*/,
-              choice("–", "—", "~", "-"),
-            )
-          ),
+          choice("–", "—", "~", "-"),
           $.quote_author_indicator,
         ),
         alias(/[^\n]+/, $.quote_author)
-      )))
+      )
     ),
 
     hidden: $ => seq(
