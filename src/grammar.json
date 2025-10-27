@@ -220,8 +220,8 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "STRING",
-            "value": "\n"
+            "type": "PATTERN",
+            "value": "\\n"
           },
           {
             "type": "REPEAT",
@@ -292,7 +292,7 @@
           },
           {
             "type": "PATTERN",
-            "value": "\\s"
+            "value": "\\s+"
           }
         ]
       }
@@ -670,10 +670,6 @@
           },
           "named": true,
           "value": "footnote_end"
-        },
-        {
-          "type": "PATTERN",
-          "value": "\\s+"
         }
       ]
     },
@@ -817,32 +813,20 @@
             "type": "REPEAT1",
             "content": {
               "type": "PATTERN",
-              "value": "[^|\\n]"
+              "value": "."
             }
           },
           "named": true,
           "value": "link_url"
         },
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "REPEAT",
-              "content": {
-                "type": "PATTERN",
-                "value": "[\\p{Space_Separator}]"
-              }
-            },
-            {
-              "type": "STRING",
-              "value": "|"
-            }
-          ]
+          "type": "STRING",
+          "value": "|"
         }
       ]
     },
     "quote": {
-      "type": "PREC_LEFT",
+      "type": "PREC_RIGHT",
       "value": 0,
       "content": {
         "type": "SEQ",
@@ -895,51 +879,61 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "REPEAT",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "\\n"
-                }
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "line_break"
+                      },
+                      {
+                        "type": "BLANK"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "STRING",
+                          "value": "–"
+                        },
+                        {
+                          "type": "STRING",
+                          "value": "—"
+                        },
+                        {
+                          "type": "STRING",
+                          "value": "~"
+                        },
+                        {
+                          "type": "STRING",
+                          "value": "-"
+                        }
+                      ]
+                    },
+                    "named": true,
+                    "value": "quote_author_indicator"
+                  },
+                  {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "[^\\n]+"
+                    },
+                    "named": true,
+                    "value": "quote_author"
+                  }
+                ]
               },
               {
                 "type": "BLANK"
               }
             ]
-          },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": "–"
-                },
-                {
-                  "type": "STRING",
-                  "value": "—"
-                },
-                {
-                  "type": "STRING",
-                  "value": "~"
-                },
-                {
-                  "type": "STRING",
-                  "value": "-"
-                }
-              ]
-            },
-            "named": true,
-            "value": "quote_author_indicator"
-          },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "PATTERN",
-              "value": "[^\\n]+"
-            },
-            "named": true,
-            "value": "quote_author"
           }
         ]
       }
@@ -1320,10 +1314,6 @@
     {
       "type": "PATTERN",
       "value": "\\s"
-    },
-    {
-      "type": "PATTERN",
-      "value": "\\n"
     }
   ],
   "conflicts": [],

@@ -361,6 +361,10 @@
       "required": true,
       "types": [
         {
+          "type": "line_break",
+          "named": true
+        },
+        {
           "type": "quote_author",
           "named": true
         },

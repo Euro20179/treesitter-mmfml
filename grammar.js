@@ -4,7 +4,7 @@ const basic_space = /[\p{Space_Separator}]/
 module.exports = grammar({
   name: "mmfml",
 
-  extras: $ => [basic_space, /\s/, /\n/],
+  extras: $ => [basic_space, /\s/],
 
   externals: $ => [
     $._code_block_start,
@@ -57,8 +57,10 @@ module.exports = grammar({
 
     list: $ => token.immediate(
       seq(
-        "\n",
+        //prevents the stupidity of this. (s.) being a list
+        /\n/,
         repeat(/\s/),
+        //END prevention
         choice(
           choice("-", "•", "*", "+"),
           seq(
@@ -69,7 +71,8 @@ module.exports = grammar({
             choice(".", "\x29") //29 is close paren
           ),
         ),
-        /\s/,
+        //there must be a space after the marker
+        /\s+/
       )
     ),
 
@@ -131,7 +134,6 @@ module.exports = grammar({
         alias("^[", $.footnote_start),
         alias($.footnote_name_text, $.footnote_block_name),
         alias("]:", $.footnote_end),
-        /\s+/,
       ),
 
     esc: $ => prec(10, /\\[^\n\p{Letter}]/),
@@ -155,24 +157,27 @@ module.exports = grammar({
     box: $ => seq("[", $.simple_marked_text, "]"),
 
     link: $ => seq(
+      //spaces prevent the spaces from being counted as the link url
       seq("|", repeat(basic_space)),
-      alias(repeat1(/[^|\n]/), $.link_url),
-      seq(repeat(basic_space), "|")
+      alias(repeat1(/./), $.link_url),
+      "|"
     ),
 
-    quote: $ => prec.left(
+    quote: $ => prec.right(
       seq(
         alias(choice(/[\p{Initial_Punctuation}「"]/, "``"), $.quote_start),
         alias(repeat1(/[^\p{Final_Punctuation}」"]/), $.quote_text),
         alias(choice(/[」"\p{Final_Punctuation}]/), $.quote_end),
         optional(
-          repeat(/\n/),
+          seq(
+            optional($.line_break),
+            alias(
+              choice("–", "—", "~", "-"),
+              $.quote_author_indicator,
+            ),
+            alias(/[^\n]+/, $.quote_author)
+          )
         ),
-        alias(
-          choice("–", "—", "~", "-"),
-          $.quote_author_indicator,
-        ),
-        alias(/[^\n]+/, $.quote_author)
       )
     ),
 
