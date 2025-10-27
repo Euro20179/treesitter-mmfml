@@ -323,10 +323,6 @@
           "named": true
         },
         {
-          "type": "space",
-          "named": true
-        },
-        {
           "type": "word",
           "named": true
         }
@@ -391,6 +387,21 @@
     "type": "quote_text",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "simple_italic",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "simple_marked_text",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "simple_marked_text",
@@ -461,6 +472,10 @@
           "named": true
         },
         {
+          "type": "simple_italic",
+          "named": true
+        },
+        {
           "type": "strikethrough",
           "named": true
         },
@@ -527,11 +542,6 @@
     }
   },
   {
-    "type": "space",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "strikethrough",
     "named": true,
     "fields": {},
@@ -581,6 +591,14 @@
     "type": "word",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": " ",
+    "named": false
+  },
+  {
+    "type": "/",
+    "named": false
   },
   {
     "type": "[",
@@ -721,5 +739,9 @@
   {
     "type": "underline_start",
     "named": true
+  },
+  {
+    "type": "|",
+    "named": false
   }
 ]

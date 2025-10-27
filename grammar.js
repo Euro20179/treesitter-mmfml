@@ -1,3 +1,6 @@
+
+const basic_space = /[\p{Space_Separator}]/
+
 module.exports = grammar({
   name: "mmfml",
   externals: $ => [
@@ -157,15 +160,15 @@ module.exports = grammar({
     box: $ => seq("[", $.simple_marked_text, "]"),
 
     link: $ => seq(
-      token.immediate(seq("|", repeat(" "))),
-      alias(prec.left(repeat1(/[^|\n]/)), $.link_url),
-      token.immediate(seq(repeat(" "), "|"))
+      seq("|", repeat(basic_space)),
+      alias(repeat1(/[^|\n]/), $.link_url),
+      seq(repeat(basic_space), "|")
     ),
 
     quote: $ => prec.left(seq(
-      alias(/[\p{Initial_Punctuation}「]/, $.quote_start),
-      alias(repeat1(/[^\p{Final_Punctuation}」]/), $.quote_text),
-      alias(/[」\p{Final_Punctuation}]/, $.quote_end),
+      alias(choice(/[\p{Initial_Punctuation}「"]/, "``"), $.quote_start),
+      alias(repeat1(/[^\p{Final_Punctuation}」"]/), $.quote_text),
+      alias(choice(/[」"\p{Final_Punctuation}]/), $.quote_end),
       optional(seq(
         alias(
           token.immediate(
@@ -198,7 +201,7 @@ module.exports = grammar({
       alias(">", $.label_end)
     ),
 
-    italic: $ => prec(10,
+    italic: $ =>
       choice(
         seq(
           alias("(/", $.italic_start),
@@ -215,8 +218,7 @@ module.exports = grammar({
           $.simple_marked_text,
           alias("/ ", $.italic_end),
         )
-      )
-    ),
+      ),
     strikethrough: $ => seq(
       alias("~", $.strikethrough_start),
       $.simple_marked_text,
@@ -245,7 +247,7 @@ module.exports = grammar({
 
     line_break: $ => "\n",
 
-    space: $ => prec.right(repeat1(/[\p{Space_Separator}]/)),
+    space: $ => prec.right(repeat1(basic_space)),
 
     non_word: $ => prec.right(repeat1(/\P{Letter}/)),
 
