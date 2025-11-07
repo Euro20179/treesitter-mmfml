@@ -84,8 +84,8 @@ But the user can just set their font if it's not monospace :)
         })
     <
 
-    I also have an [ftplugin]
-    |https://github.com/Euro20179/.files/blob/master/.config/nvim/after/ftplugin/mmfml.lua|
+    I also have a [neovim plugin]
+    |https://static.seceurity.place/git/nvim-mmfml/|
     that adds a couple of commands and shortcuts.
 
 
