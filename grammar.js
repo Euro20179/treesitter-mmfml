@@ -77,54 +77,57 @@ module.exports = grammar({
     ),
 
     divider: $ => token.immediate(
-      seq(
-        optional(choice("<", "|", "├", "┣")),
-        choice(
-          repeat1(
-            seq("##", repeat1("#"))
+      choice(
+        seq(
+          optional(choice("<", "|", "├", "┣")),
+          choice(
+            repeat1(
+              seq("##", repeat1("#"))
+            ),
+            repeat1(
+              seq("==", repeat1("="))
+            ),
+            repeat1(
+              //at least 4 dots because ... is ellipses
+              seq("...", repeat1("."))
+            ),
+            repeat1(
+              seq("--", repeat1("-"))
+            ),
+            repeat1(
+              seq("++", repeat1("+"))
+            ),
+            repeat1(
+              seq("__", repeat1("_"))
+            ),
+            repeat1(
+              seq("::", repeat1(":"))
+            ),
+            repeat1(
+              seq("——", repeat1("—"))
+            ),
+            repeat1(
+              seq("––", repeat1("–"))
+            ),
+            repeat1(
+              seq("‗‗", repeat1("‗"))
+            ),
+            repeat1(
+              seq("‾‾", repeat1("‾"))
+            ),
+            repeat1(
+              seq("━━", repeat1("━"))
+            ),
+            repeat1(
+              seq("──", repeat1("─"))
+            ),
+            repeat1(
+              seq("~~", repeat1("~"))
+            )
           ),
-          repeat1(
-            seq("==", repeat1("="))
-          ),
-          repeat1(
-            //at least 4 dots because ... is ellipses
-            seq("...", repeat1("."))
-          ),
-          repeat1(
-            seq("--", repeat1("-"))
-          ),
-          repeat1(
-            seq("++", repeat1("+"))
-          ),
-          repeat1(
-            seq("__", repeat1("_"))
-          ),
-          repeat1(
-            seq("::", repeat1(":"))
-          ),
-          repeat1(
-            seq("——", repeat1("—"))
-          ),
-          repeat1(
-            seq("––", repeat1("–"))
-          ),
-          repeat1(
-            seq("‗‗", repeat1("‗"))
-          ),
-          repeat1(
-            seq("‾‾", repeat1("‾"))
-          ),
-          repeat1(
-            seq("━━", repeat1("━"))
-          ),
-          repeat1(
-            seq("──", repeat1("─"))
-          ),
-          repeat1(
-            seq("~~", repeat1("~"))
-          )
+          optional(choice(">", "|", "┤", "┫"))
         ),
-        optional(choice(">", "|", "┤", "┫"))
+        "¦"
       )
     ),
 
