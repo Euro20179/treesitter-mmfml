@@ -42,7 +42,6 @@ module.exports = grammar({
       $.inline_code,
       $.quote,
       $.hidden,
-      $.label
     ))),
 
     inline_code: $ => seq(
@@ -196,12 +195,6 @@ module.exports = grammar({
       alias("*", $.bold_end)
     ),
 
-    label: $ => seq(
-      alias("<", $.label_start),
-      $.plain,
-      alias(">", $.label_end)
-    ),
-
     italic: $ => prec(10,
       choice(
         seq(
@@ -217,7 +210,7 @@ module.exports = grammar({
         seq(
           alias(" /", $.italic_start),
           $.simple_marked_text,
-          alias("/ ", $.italic_end),
+          alias(/\/ /, $.italic_end),
         )
       ),
     ),
