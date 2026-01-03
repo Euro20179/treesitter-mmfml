@@ -130,10 +130,6 @@
             {
               "type": "SYMBOL",
               "name": "hidden"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "label"
             }
           ]
         }
@@ -1006,33 +1002,6 @@
           },
           "named": true,
           "value": "bold_end"
-        }
-      ]
-    },
-    "label": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "<"
-          },
-          "named": true,
-          "value": "label_start"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "plain"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": ">"
-          },
-          "named": true,
-          "value": "label_end"
         }
       ]
     },
