@@ -101,10 +101,6 @@
             },
             {
               "type": "SYMBOL",
-              "name": "higlight"
-            },
-            {
-              "type": "SYMBOL",
               "name": "footnote_ref"
             },
             {
@@ -1178,33 +1174,6 @@
           },
           "named": true,
           "value": "pre_sample_end"
-        }
-      ]
-    },
-    "higlight": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "+"
-          },
-          "named": true,
-          "value": "higlight_start"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "simple_marked_text"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "+"
-          },
-          "named": true,
-          "value": "higlight_end"
         }
       ]
     },

@@ -68,14 +68,6 @@ This way the user to format the text however they see fit
 
     `||hidden||`
 
-== Highlight/marks ==
-
-    `+this is a highlight+`
-
-    >html
-    <mark>this an equivelent highlight in html</mark>
-    <
-
 == Basic quotes ==
 
     `‘this is a quote’`

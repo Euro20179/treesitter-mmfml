@@ -34,7 +34,6 @@ module.exports = grammar({
       $.pre_sample,
       $.link,
       $.box,
-      $.higlight,
       $.footnote_ref,
       $.anchor,
       $.plain,
@@ -228,11 +227,6 @@ module.exports = grammar({
       alias("`", $.pre_sample_start),
       alias(/[^`]+/, $.pre_sample_text),
       alias("`", $.pre_sample_end)
-    ),
-    higlight: $ => seq(
-      alias("+", $.higlight_start),
-      $.simple_marked_text,
-      alias("+", $.higlight_end)
     ),
     anchor: $ => seq(
       alias("#", $.anchor_start),

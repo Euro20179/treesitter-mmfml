@@ -194,29 +194,6 @@
     }
   },
   {
-    "type": "higlight",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "higlight_end",
-          "named": true
-        },
-        {
-          "type": "higlight_start",
-          "named": true
-        },
-        {
-          "type": "simple_marked_text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "inline_code",
     "named": true,
     "fields": {},
@@ -403,10 +380,6 @@
         },
         {
           "type": "hidden",
-          "named": true
-        },
-        {
-          "type": "higlight",
           "named": true
         },
         {
@@ -600,14 +573,6 @@
   },
   {
     "type": "hidden_start",
-    "named": true
-  },
-  {
-    "type": "higlight_end",
-    "named": true
-  },
-  {
-    "type": "higlight_start",
     "named": true
   },
   {
